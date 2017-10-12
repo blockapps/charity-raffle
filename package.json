@@ -1,0 +1,27 @@
+{
+  "name": "lottery-demo-app",
+  "version": "1.0.0",
+  "description": "A lottery demo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blockapps/lottery-demo-app.git"
+  },
+  "author": "Dustin Norwood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blockapps/lottery-demo-app/issues"
+  },
+  "homepage": "https://github.com/blockapps/lottery-demo-app#readme",
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0"
+  }
+}
