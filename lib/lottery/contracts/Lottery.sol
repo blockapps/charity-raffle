@@ -2,18 +2,12 @@
 
 contract Lottery {
   address[] public entries;
-  uint public totalValue;
-  uint public maxEntries;
-  uint public ticketPrice = 1 ether;
+  uint public ticketCount;
+  uint public ticketPrice;
 
-  function Lottery(uint _totalValue) {
-    // value must be higher than ticket price
-    if (_totalValue < ticketPrice) {
-      throw;
-    }
-    // all good
-    totalValue = _totalValue;
-    maxEntries = totalValue / ticketPrice;
+  function Lottery(uint _ticketCount, uint _ticketPrice) {
+    ticketCount = _ticketCount;
+    ticketPrice = _ticketPrice;
   }
 
   function enter() payable returns (bool) {
@@ -22,7 +16,7 @@ contract Lottery {
       return false;
     }
     // check capacity
-    if (entries.length >= maxEntries) {
+    if (entries.length >= ticketCount) {
       return false;
     }
     // enter the lottery
