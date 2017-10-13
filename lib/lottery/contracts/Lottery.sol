@@ -5,6 +5,9 @@ contract Lottery {
   uint public ticketCount;
   uint public ticketPrice;
 
+  uint winner;
+  address winnerAddress;
+
   function Lottery(uint _ticketCount, uint _ticketPrice) {
     // if ticket count < 2 - whats the point
     if (_ticketCount < 2) {
@@ -26,10 +29,11 @@ contract Lottery {
     }
     // enter the lottery
     entries.push(msg.sender);
+    // payout
+    if (entries.length >= ticketCount) {
+      return payout();
+    }
     return true;
-      /*if(this.balance > totalValue) {
-          payout();
-      }*/
    }
 
   /* return a random index into entries */
@@ -43,9 +47,11 @@ contract Lottery {
     }
     return rand(seed);
   }
-/*
-    function payout() internal {
-        uint winner = uint(keccak256(entries)) % numEntries;
-        entries[winner].send(this.balance);
-    }*/
+
+  function payout() internal returns (bool){
+    winner = rand(block.number);
+    winnerAddress = entries[winner];
+    winnerAddress.send(this.balance);
+    return true;
+  }
 }
