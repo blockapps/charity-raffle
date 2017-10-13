@@ -6,6 +6,11 @@ contract Lottery {
   uint public ticketPrice;
 
   function Lottery(uint _ticketCount, uint _ticketPrice) {
+    // if ticket count < 2 - whats the point
+    if (_ticketCount < 2) {
+      throw;
+    }
+    // all good
     ticketCount = _ticketCount;
     ticketPrice = _ticketPrice;
   }
@@ -26,6 +31,18 @@ contract Lottery {
           payout();
       }*/
    }
+
+  /* return a random index into entries */
+  function rand(uint seed) internal returns (uint) {
+    return uint(keccak256(seed)) % entries.length;
+  }
+
+  function testRand(uint seed) returns (uint) {
+    if (entries.length < 2) {
+      return 99999999;
+    }
+    return rand(seed);
+  }
 /*
     function payout() internal {
         uint winner = uint(keccak256(entries)) % numEntries;
