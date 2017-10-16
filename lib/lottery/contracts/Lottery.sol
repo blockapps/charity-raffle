@@ -5,8 +5,8 @@ contract Lottery {
   uint public ticketCount;
   uint public ticketPrice;
 
-  uint winner;
-  address winnerAddress;
+  uint public winner;
+  address public winnerAddress;
 
   function Lottery(uint _ticketCount, uint _ticketPrice) {
     // if ticket count < 2 - whats the point
@@ -16,6 +16,7 @@ contract Lottery {
     // all good
     ticketCount = _ticketCount;
     ticketPrice = _ticketPrice;
+    winnerAddress = 0;
   }
 
   function enter() payable returns (bool) {
