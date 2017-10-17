@@ -12,7 +12,7 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14",
-    "blockapps-rest": "git://github.com/blockapps/blockapps-rest.git#v4.0.2",
+    "blockapps-rest": "git://github.com/blockapps/blockapps-rest.git",
     "chai": "^4.0.2",
     "co": "^4.6.0",
     "co-mocha": "^1.2.0",
