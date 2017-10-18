@@ -11,12 +11,14 @@ import {
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import {routerReducer} from 'react-router-redux';
+import participateReducer from './components/Participate/participate.reducer'
 
 import App from './App/';
 import {unregister as unregisterServiceWorker} from './registerServiceWorker';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
+  participate: participateReducer,
   // YOUR REDUCERS HERE
 });
 

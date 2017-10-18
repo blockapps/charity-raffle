@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class PostLottery extends Component {
   render() {
@@ -8,6 +9,9 @@ class PostLottery extends Component {
           <div className="col-sm-12">
             <h3>Lottery successfully created!</h3>
           </div>
+          <Link to="/">
+            <button className="pt-button">Back</button>
+          </Link>
         </div>
       </div>
     );

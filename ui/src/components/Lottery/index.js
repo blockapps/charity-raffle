@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+
+import Participate from '../Participate/';
 
 class Lottery extends Component {
+  name= "Lottery";
+  symbol= "enter_or_something";
+
   render() {
     // TODO :: get lotteryData from this.props
     // const lotteryData = undefined;
@@ -22,9 +26,11 @@ class Lottery extends Component {
           <span>{lotteryData.current} </span>
         </div>
         <div className="col-sm-3">
-          <Link to={'/participate/' + lotteryData.address}>
-            <button className="pt-button pt-small">Participate</button>
-          </Link>
+          <Participate
+            contractName={this.name}
+            contractAddress={lotteryData.address}
+            symbolName={this.symbol}
+          />
         </div>
       </div>
     );

@@ -1,42 +1,174 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Button, Dialog } from '@blueprintjs/core';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import {
+  methodCall,
+  methodCallOpenModal,
+  methodCallCloseModal
+} from './participate.actions';
 
 class Participate extends Component {
+
+  handleOpenModal = (e) => {
+    console.log('Button clicked: ', this.props);
+    e.stopPropagation();
+    e.preventDefault();
+    this.props.methodCallOpenModal();
+  }
+
+  handleCloseModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    this.props.reset();
+    this.props.methodCallCloseModal();
+  }
+ 
+  submit = (values) => {
+    const payload = {
+      contractName: this.props.contractName,
+      contractAddress: this.props.contractAddress,
+      methodName: this.props.symbolName,
+      username: values.modalUsername,
+      userAddress: values.modalAddress,
+      password: values.modalPassword,
+      value: values.modalValue,
+    }
+    this.props.methodCall(payload);
+  }
+
   render() {
-    // TODO :: get lotteryData from this.props
-    // const lotteryData = undefined;
-    const lotteryData = {
-      address:"0xdeadbeef",
-      prize:100000,
-      current:95638,
-    };
+    const handleSubmit = this.props.handleSubmit;
+    console.log('this.props.isOpen: ', this.props.isOpen);
+    console.log('this.isOpen: ', this.isOpen);
+
     return (
-      <div className="container">
-        <div className="row lt-v-pad-8">
-          <div className="col-sm-12">
-            <div className="pt-card">
-              <h3> Contribute ether to participate </h3>
-              <div>
-                Username
-                <input type="text" value="Bob" />
+      <div>
+        <Button
+          className="pt-minimal pt-small pt-intent-primary"
+          onClick={this.handleOpenModal}
+        >
+          Participate
+        </Button>
+        <form>
+          <Dialog
+            iconName="exchange"
+            isOpen={this.props.isOpen}
+            onClose={this.handleCloseModal}
+            title={"Enter " + this.props.contractName}
+            className="pt-dark"
+          >
+            <div className="pt-dialog-body">
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="pt-label" style={{marginTop: '5px'}}>
+                    Username
+                  </label>
+                </div>
+                <div className="col-sm-9">
+                  <div className="pt-select">
+                    <Field
+                      className="pt-input"
+                      name="modalUsername"
+                      component="input"
+                      type="text"
+                      required
+                    />
+                  </div>
+                </div>
               </div>
-              <div>
-                Password
-                <input type="text" value="password" />
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="pt-label" style={{marginTop: '9px'}}>
+                    Address
+                  </label>
+                </div>
+                <div className="col-sm-9 smd-pad-4">
+                  <div className="pt-select">
+                    <Field
+                      className="pt-input"
+                      component="input"
+                      type="text"
+                      name="modalAddress"
+                      required
+                    />
+                  </div>
+                </div>
               </div>
-              <div>
-                Number of tickets
-                <input type="text" value="1" />
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="pt-label" style={{marginTop: '9px'}}>
+                    Password
+                  </label>
+                </div>
+                <div className="col-sm-9 smd-pad-4">
+                  <Field
+                    name="modalPassword"
+                    className="pt-input"
+                    placeholder="Password"
+                    component="input"
+                    type="password"
+                    required
+                  />
+                </div>
               </div>
-              <Link to={'/enter-lottery/' + lotteryData.address}>
-                <button className="pt-button">Enter Lottery</button>
-              </Link>
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="pt-label" style={{marginTop: '9px'}}>
+                    Number of Tickets
+                  </label>
+                </div>
+                <div className="col-sm-9 smd-pad-4">
+                  <Field
+                    name="modalValue"
+                    component="input"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+            <div className="pt-dialog-footer">
+              <div className="pt-dialog-footer-actions">
+                <Button text="Cancel" onClick={this.handleCloseModal} />
+                <button
+                  disabled={this.props.pristine || this.props.submitting}
+                  className="pt-button pt-intent-primary"
+                  type="button"
+                  onClick={handleSubmit(this.submit)}
+                >
+                  Enter Lottery
+                </button>
+              </div>
+            </div>
+          </Dialog>
+        </form>
       </div>
     );
   }
 }
 
-export default Participate;
+const selector = formValueSelector('participate');
+
+function mapStateToProps(state) {
+  console.log('mapStateToProps');
+  return {
+    isOpen: state.participate.isOpen,
+    modalUsername: '',
+  };
+}
+
+
+const formed = reduxForm({ form: 'participate' })(Participate);
+const connected = connect(
+  mapStateToProps,
+  {
+    methodCallOpenModal,
+    methodCallCloseModal,
+    methodCall,
+  }
+)(formed);
+const routed = withRouter(connected);
+
+export default routed;
