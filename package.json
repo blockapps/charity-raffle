@@ -1,0 +1,22 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.14",
+    "blockapps-rest": "git://github.com/blockapps/blockapps-rest.git",
+    "chai": "^4.0.2",
+    "co": "^4.6.0",
+    "co-mocha": "^1.2.0",
+    "expect": "latest",
+    "mocha": "^3.4.2"
+  }
+}
