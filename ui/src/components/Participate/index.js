@@ -26,15 +26,11 @@ class Participate extends Component {
  
   submit = (values) => {
     const payload = {
-      contractName: this.props.contractName,
-      contractAddress: this.props.contractAddress,
-      methodName: this.props.symbolName,
-      username: values.modalUsername,
-      userAddress: values.modalAddress,
-      password: values.modalPassword,
-      value: values.modalValue,
+      admin: this.props.modalUsername,
+      contract: this.props.contractName,
+      user: this.props.modalUsername,
     }
-    this.props.participateRequest(payload);
+    this.props.participateRequest(this.props.lookup, payload);
   }
 
   render() {
@@ -54,7 +50,6 @@ class Participate extends Component {
             isOpen={this.props.modal.isOpen}
             onClose={this.handleCloseModal}
             title={"Enter " + this.props.contractName}
-            className="pt-dark"
           >
             <div className="pt-dialog-body">
               <div className="row">

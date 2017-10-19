@@ -26,15 +26,15 @@ class NewLottery extends Component {
  
   submit = (values) => {
     const payload = {
-      contractName: this.props.contractName,
-      contractAddress: this.props.contractAddress,
-      methodName: this.props.symbolName,
-      username: values.modalUsername,
-      userAddress: values.modalAddress,
-      password: values.modalPassword,
-      value: values.modalValue,
-      ticketPrice: values.modalTicketPrice,      
+      admin: values.modalUsername,
+      args: {
+        address: values.modalAddress,
+        name: values.modalName,
+        numTickets: values.modalValue,
+        ticketPrice: values.modalTicketPrice
+      }  
     }
+    console.log('Submit new lottery', payload);
     this.props.newLotteryCall(payload);
   }
 
@@ -55,7 +55,6 @@ class NewLottery extends Component {
             isOpen={this.props.isOpen}
             onClose={this.handleCloseModal}
             title={"Create new lottery"}
-            className="pt-dark"
           >
             <div className="pt-dialog-body">
               <div className="row">
@@ -105,6 +104,22 @@ class NewLottery extends Component {
                     type="password"
                     required
                   />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-3">
+                  <label className="pt-label" style={{marginTop: '9px'}}>
+                    Lottery Name
+                  </label>
+                </div>
+                <div className="col-sm-9 smd-pad-4">
+                    <Field
+                      className="pt-input"
+                      component="input"
+                      type="text"
+                      name="modalName"
+                      required
+                    />
                 </div>
               </div>
               <div className="row">

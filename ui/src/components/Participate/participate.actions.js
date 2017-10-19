@@ -18,7 +18,7 @@ export const participateCloseModal = function(key) {
   };
 }
 
-export const participateRequest = function(payload,key) {
+export const participateRequest = function(key,payload) {
   return {
     type: PARTICIPATE_REQUEST,
     payload: payload,
@@ -26,7 +26,7 @@ export const participateRequest = function(payload,key) {
   };
 }
 
-export const participateSuccess = function(result,key) {
+export const participateSuccess = function(key,result) {
   return {
     type: PARTICIPATE_SUCCESS,
     result: result,
@@ -34,7 +34,7 @@ export const participateSuccess = function(result,key) {
   };
 }
 
-export const participateFailure = function(error,key) {
+export const participateFailure = function(key,error) {
   return {
     type: PARTICIPATE_FAILURE,
     result: error,

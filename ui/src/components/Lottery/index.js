@@ -11,10 +11,10 @@ class Lottery extends Component {
           <span>{this.props.lotteryData.name}</span>
         </div>
         <div className="col-sm-3">
-          <span>{this.props.lotteryData.prize} </span>
+          <span>{this.props.lotteryData.numTickets * this.props.lotteryData.ticketPrice} </span>
         </div>
         <div className="col-sm-3">
-          <span>{this.props.lotteryData.current} </span>
+          <span>{this.props.lotteryData.numSold} </span>
         </div>
         <div className="col-sm-3">
           <Participate

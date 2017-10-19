@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
+import { Button, Dialog } from '@blueprintjs/core';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Lottery from '../Lottery';
+import {
+  lotteryListRequest,
+} from './lotterylist.actions';
 
 class LotteryList extends Component {
-  render() {
-    // TODO :: get lotteryData from sagas
-    // const allLotteryData = undefined;
-    const allLotteryData = [
-      // TODO :: get lotteryData from this.props
-      // const lotteryData = undefined;
-      {
-        address:"0xdeadbeef",
-        prize:100000,
-        current:95638,
-        name:"Lottery 1",
-      },
-      {
-        address:"0x123456789abcdef",
-        prize:10000000,
-        current:0,
-        name:"Lottery 2",
-      },      
-      {
-        address:"0x07041776",
-        prize:538,
-        current:270,
-        name:"The Electoral College",
-      },
-    ];
+  constructor(props) {
+    super(props);
+    console.log('super');
+    this.startPoll();
+    this.requestLotteryList();
+  }
 
-    const lotteries = allLotteryData.map((item, i) =>{
+  startPoll() {
+    const fetchLotteries = this.props.lotteryListRequest;
+    this.timeout = setInterval(function () {
+      fetchLotteries();
+    }, 5000);
+  }
+
+  requestLotteryList() {
+    this.props.lotteryListRequest();
+  }
+
+  render() {
+    const lotteries = this.props.lotteries.map((item, i) =>{
       return (<Lottery key={i} lotteryData={item} />)
     });
     return (
@@ -55,4 +55,22 @@ class LotteryList extends Component {
   }
 }
 
-export default LotteryList;
+const selector = formValueSelector('lotteryList');
+
+function mapStateToProps(state) {
+  return {
+    lotteries: state.lotteryList.lotteries,
+  };
+}
+
+
+const formed = reduxForm({ form: 'lotteryList' })(LotteryList);
+const connected = connect(
+  mapStateToProps,
+  {
+    lotteryListRequest,
+  }
+)(formed);
+const routed = withRouter(connected);
+
+export default routed;
