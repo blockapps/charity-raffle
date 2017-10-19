@@ -14,14 +14,14 @@ class Participate extends Component {
   handleOpenModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    this.props.methodCallOpenModal();
+    this.props.methodCallOpenModal(this.props.lookup);
   }
 
   handleCloseModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
     this.props.reset();
-    this.props.methodCallCloseModal();
+    this.props.methodCallCloseModal(this.props.lookup);
   }
  
   submit = (values) => {
@@ -51,7 +51,7 @@ class Participate extends Component {
         <form>
           <Dialog
             iconName="exchange"
-            isOpen={this.props.isOpen}
+            isOpen={this.props.modal.isOpen}
             onClose={this.handleCloseModal}
             title={"Enter " + this.props.contractName}
             className="pt-dark"
@@ -148,10 +148,12 @@ class Participate extends Component {
 
 const selector = formValueSelector('participate');
 
-function mapStateToProps(state) {
+function mapStateToProps(state,ownProps) {
   return {
-    isOpen: state.participate.isOpen,
-    modalUsername: '',
+    modal: state.participate.modals
+      && state.participate.modals[ownProps.lookup] ?
+      state.participate.modals[ownProps.lookup] : {},
+    modalUsername: selector(state, 'modalUsername')
   };
 }
 

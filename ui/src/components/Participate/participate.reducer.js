@@ -7,32 +7,67 @@ import {
   } from './participate.actions';
   
   const initialState = {
-    isOpen: false,
+    modals: {}
   };
   
   
   const reducer = function (state = initialState, action) {
     switch (action.type) {
       case METHOD_CALL_OPEN_MODAL:
-        return {
-            isOpen: true,
+        return {        
+            modals: {
+            ...state.modals,
+            [action.key] : {
+                ...state.modals[action.key],
+                isOpen: true,
+                result: 'Waiting for method to be called...'
+              }
+          }
         }
       case METHOD_CALL_CLOSE_MODAL:
-        return {
-            isOpen: false,
+        return {        
+          modals: {
+          ...state.modals,
+          [action.key] : {
+              ...state.modals[action.key],
+              isOpen: false,
+              result: 'Waiting for method to be called...'
+            }
         }
+      }
       case METHOD_CALL_REQUEST:
-        return {
-          isOpen: false,
+        return {        
+          modals: {
+          ...state.modals,
+          [action.key] : {
+              ...state.modals[action.key],
+              isOpen: false,
+              result: 'Waiting for method to be called...'
+            }
         }
+      }
       case METHOD_CALL_SUCCESS:
-        return {
-          isOpen: false,
+        return {        
+          modals: {
+          ...state.modals,
+          [action.key] : {
+              ...state.modals[action.key],
+              isOpen: false,
+              result: 'Waiting for method to be called...'
+            }
         }
+      }
       case METHOD_CALL_FAILURE:
-        return {
-          isOpen: false,
+        return {        
+          modals: {
+          ...state.modals,
+          [action.key] : {
+              ...state.modals[action.key],
+              isOpen: false,
+              result: 'Waiting for method to be called...'
+            }
         }
+      }
       default:
         return state;
     }

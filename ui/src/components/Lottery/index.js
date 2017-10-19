@@ -18,6 +18,8 @@ class Lottery extends Component {
         </div>
         <div className="col-sm-3">
           <Participate
+            key={'participate' + this.props.lotteryData.address}
+            lookup={'participate' + this.props.lotteryData.address}
             contractName={this.props.lotteryData.name}
             contractAddress={this.props.lotteryData.address}
           />
