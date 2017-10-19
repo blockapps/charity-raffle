@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {reducer as formReducer} from 'redux-form';
 import {Provider} from 'react-redux';
 import {HashRouter as Router} from 'react-router-dom'
 import {
@@ -18,6 +18,7 @@ import App from './App/';
 import {unregister as unregisterServiceWorker} from './registerServiceWorker';
 
 const rootReducer = combineReducers({
+  form: formReducer,
   routing: routerReducer,
   newLottery: newLotteryReducer,
   participate: participateReducer,

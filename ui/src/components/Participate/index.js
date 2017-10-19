@@ -64,7 +64,6 @@ class Participate extends Component {
                   </label>
                 </div>
                 <div className="col-sm-9">
-                  <div className="pt-select">
                     <Field
                       className="pt-input"
                       name="modalUsername"
@@ -72,7 +71,6 @@ class Participate extends Component {
                       type="text"
                       required
                     />
-                  </div>
                 </div>
               </div>
               <div className="row">
@@ -82,7 +80,6 @@ class Participate extends Component {
                   </label>
                 </div>
                 <div className="col-sm-9 smd-pad-4">
-                  <div className="pt-select">
                     <Field
                       className="pt-input"
                       component="input"
@@ -90,7 +87,6 @@ class Participate extends Component {
                       name="modalAddress"
                       required
                     />
-                  </div>
                 </div>
               </div>
               <div className="row">
@@ -119,8 +115,9 @@ class Participate extends Component {
                 <div className="col-sm-9 smd-pad-4">
                   <Field
                     name="modalValue"
+                    className="pt-input"
                     component="input"
-                    type="text"
+                    type="number"
                     required
                   />
                 </div>
