@@ -4,15 +4,14 @@ import {
     call
   } from 'redux-saga/effects';
   import {
-    METHOD_CALL_REQUEST,
-    methodCallSuccess,
-    methodCallFailure,
+    PARTICIPATE_REQUEST,
+    participateSuccess,
+    participateFailure,
   } from './participate.actions';
   
-  const methodUrl = "#";
-  //env.BLOC_URL + "/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve";
+  const methodUrl = "bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve";
   
-  function postMethodCall(payload) {
+  function postParticipate(payload) {
     return fetch(
       methodUrl
         .replace(':username', payload.username)
@@ -40,17 +39,17 @@ import {
       });
   }
   
-  function* methodCall(action) {
+  function* makeParticipateRequest(action) {
     try {
-      const response = yield call(postMethodCall,action.payload);
-      yield put(methodCallSuccess(JSON.stringify(response, null, 2)));
+      const response = yield call(postParticipate,action.payload);
+      yield put(participateSuccess(JSON.stringify(response, null, 2)));
     }
     catch(err) {
-      yield put(methodCallFailure(err));
+      yield put(participateFailure(err));
     }
   }
   
-  export function* watchMethodCall() {
-    yield takeEvery(METHOD_CALL_REQUEST, methodCall);
+  export function* watchParticipate() {
+    yield takeEvery(PARTICIPATE_REQUEST, makeParticipateRequest);
   }
   

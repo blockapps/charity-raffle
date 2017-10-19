@@ -1,9 +1,9 @@
 import {
-    METHOD_CALL_CLOSE_MODAL,
-    METHOD_CALL_OPEN_MODAL,
-    METHOD_CALL_REQUEST,
-    METHOD_CALL_SUCCESS,
-    METHOD_CALL_FAILURE
+    PARTICIPATE_CLOSE_MODAL,
+    PARTICIPATE_OPEN_MODAL,
+    PARTICIPATE_REQUEST,
+    PARTICIPATE_SUCCESS,
+    PARTICIPATE_FAILURE
   } from './participate.actions';
   
   const initialState = {
@@ -13,7 +13,7 @@ import {
   
   const reducer = function (state = initialState, action) {
     switch (action.type) {
-      case METHOD_CALL_OPEN_MODAL:
+      case PARTICIPATE_OPEN_MODAL:
         return {        
             modals: {
             ...state.modals,
@@ -24,7 +24,7 @@ import {
               }
           }
         }
-      case METHOD_CALL_CLOSE_MODAL:
+      case PARTICIPATE_CLOSE_MODAL:
         return {        
           modals: {
           ...state.modals,
@@ -35,7 +35,7 @@ import {
             }
         }
       }
-      case METHOD_CALL_REQUEST:
+      case PARTICIPATE_REQUEST:
         return {        
           modals: {
           ...state.modals,
@@ -46,7 +46,7 @@ import {
             }
         }
       }
-      case METHOD_CALL_SUCCESS:
+      case PARTICIPATE_SUCCESS:
         return {        
           modals: {
           ...state.modals,
@@ -57,7 +57,7 @@ import {
             }
         }
       }
-      case METHOD_CALL_FAILURE:
+      case PARTICIPATE_FAILURE:
         return {        
           modals: {
           ...state.modals,

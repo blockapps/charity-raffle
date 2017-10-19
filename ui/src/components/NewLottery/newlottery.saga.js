@@ -9,10 +9,9 @@ import {
     newLotteryFailure,
   } from './newlottery.actions';
   
-  const methodUrl = "#";
-  //env.BLOC_URL + "/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve";
+  const methodUrl = "bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve";
   
-  function postMethodCall(payload) {
+  function postNewLottery(payload) {
     return fetch(
       methodUrl
         .replace(':username', payload.username)
@@ -40,9 +39,9 @@ import {
       });
   }
   
-  function* methodCall(action) {
+  function* makeNewLotteryRequest(action) {
     try {
-      const response = yield call(postMethodCall,action.payload);
+      const response = yield call(postNewLottery,action.payload);
       yield put(newLotterySuccess(JSON.stringify(response, null, 2)));
     }
     catch(err) {
@@ -50,7 +49,7 @@ import {
     }
   }
   
-  export function* watchMethodCall() {
-    yield takeEvery(NEW_LOTTERY_REQUEST, methodCall);
+  export function* watchNewLottery() {
+    yield takeEvery(NEW_LOTTERY_REQUEST, makeNewLotteryRequest);
   }
   

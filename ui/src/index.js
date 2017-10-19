@@ -10,12 +10,16 @@ import {
     compose,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { fork } from 'redux-saga/effects';
 import {routerReducer} from 'react-router-redux';
 import newLotteryReducer from './components/NewLottery/newlottery.reducer'
 import participateReducer from './components/Participate/participate.reducer'
 
 import App from './App/';
 import {unregister as unregisterServiceWorker} from './registerServiceWorker';
+
+import { watchNewLottery } from './components/NewLottery/newlottery.saga';
+import { watchParticipate } from './components/Participate/participate.saga';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -28,6 +32,8 @@ const rootReducer = combineReducers({
 const rootSaga = function* startForeman() {
     yield [
         // YOUR SAGAS HERE
+        fork(watchParticipate),
+        fork(watchNewLottery)
     ]
 };
 

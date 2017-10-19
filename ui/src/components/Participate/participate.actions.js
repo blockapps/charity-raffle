@@ -1,42 +1,42 @@
-export const METHOD_CALL_OPEN_MODAL = 'METHOD_CALL_OPEN_MODAL';
-export const METHOD_CALL_CLOSE_MODAL = 'METHOD_CALL_CLOSE_MODAL';
-export const METHOD_CALL_REQUEST = 'METHOD_CALL_REQUEST';
-export const METHOD_CALL_SUCCESS = 'METHOD_CALL_SUCCESS';
-export const METHOD_CALL_FAILURE = 'METHOD_CALL_FAILURE';
+export const PARTICIPATE_OPEN_MODAL = 'PARTICIPATE_OPEN_MODAL';
+export const PARTICIPATE_CLOSE_MODAL = 'PARTICIPATE_CLOSE_MODAL';
+export const PARTICIPATE_REQUEST = 'PARTICIPATE_REQUEST';
+export const PARTICIPATE_SUCCESS = 'PARTICIPATE_SUCCESS';
+export const PARTICIPATE_FAILURE = 'PARTICIPATE_FAILURE';
 
-export const methodCallOpenModal = function(key) {
+export const participateOpenModal = function(key) {
   return {
-    type: METHOD_CALL_OPEN_MODAL,
+    type: PARTICIPATE_OPEN_MODAL,
     key: key
   };
 }
 
-export const methodCallCloseModal = function(key) {
+export const participateCloseModal = function(key) {
   return {
-    type: METHOD_CALL_CLOSE_MODAL,
+    type: PARTICIPATE_CLOSE_MODAL,
     key: key
   };
 }
 
-export const methodCall = function(payload,key) {
+export const participateRequest = function(payload,key) {
   return {
-    type: METHOD_CALL_REQUEST,
+    type: PARTICIPATE_REQUEST,
     payload: payload,
     key: key
   };
 }
 
-export const methodCallSuccess = function(result,key) {
+export const participateSuccess = function(result,key) {
   return {
-    type: METHOD_CALL_SUCCESS,
+    type: PARTICIPATE_SUCCESS,
     result: result,
     key: key
   };
 }
 
-export const methodCallFailure = function(error,key) {
+export const participateFailure = function(error,key) {
   return {
-    type: METHOD_CALL_FAILURE,
+    type: PARTICIPATE_FAILURE,
     result: error,
     key: key
   };

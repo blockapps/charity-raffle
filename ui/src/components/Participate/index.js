@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import {
-  methodCall,
-  methodCallOpenModal,
-  methodCallCloseModal
+  participateRequest,
+  participateOpenModal,
+  participateCloseModal
 } from './participate.actions';
 
 class Participate extends Component {
@@ -14,14 +14,14 @@ class Participate extends Component {
   handleOpenModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    this.props.methodCallOpenModal(this.props.lookup);
+    this.props.participateOpenModal(this.props.lookup);
   }
 
   handleCloseModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
     this.props.reset();
-    this.props.methodCallCloseModal(this.props.lookup);
+    this.props.participateCloseModal(this.props.lookup);
   }
  
   submit = (values) => {
@@ -34,7 +34,7 @@ class Participate extends Component {
       password: values.modalPassword,
       value: values.modalValue,
     }
-    this.props.methodCall(payload);
+    this.props.participateRequest(payload);
   }
 
   render() {
@@ -159,9 +159,9 @@ const formed = reduxForm({ form: 'participate' })(Participate);
 const connected = connect(
   mapStateToProps,
   {
-    methodCallOpenModal,
-    methodCallCloseModal,
-    methodCall,
+    participateOpenModal,
+    participateCloseModal,
+    participateRequest,
   }
 )(formed);
 const routed = withRouter(connected);
