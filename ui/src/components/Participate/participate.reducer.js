@@ -12,10 +12,8 @@ import {
   
   
   const reducer = function (state = initialState, action) {
-      console.log(action);
     switch (action.type) {
       case METHOD_CALL_OPEN_MODAL:
-        console.log('reducer called');
         return {
             isOpen: true,
         }

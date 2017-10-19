@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import NewLottery from '../NewLottery/';
 import LotteryList from '../LotteryList/';
 
 
@@ -10,9 +11,7 @@ class Dashboard extends Component {
       <div className="container">
         <div className="row">
           <div className="col-sm-12 text-right lt-v-pad-8">
-            <Link to="/new-lottery">
-              <button className="pt-button">Create Lottery</button>
-            </Link>
+            <NewLottery />
           </div>
         </div>
         <div className="row">

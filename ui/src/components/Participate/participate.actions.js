@@ -5,7 +5,6 @@ export const METHOD_CALL_SUCCESS = 'METHOD_CALL_SUCCESS';
 export const METHOD_CALL_FAILURE = 'METHOD_CALL_FAILURE';
 
 export const methodCallOpenModal = function() {
-    console.log('openModal called');
   return {
     type: METHOD_CALL_OPEN_MODAL,
   };

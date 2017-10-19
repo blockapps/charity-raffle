@@ -12,7 +12,6 @@ import {
 class Participate extends Component {
 
   handleOpenModal = (e) => {
-    console.log('Button clicked: ', this.props);
     e.stopPropagation();
     e.preventDefault();
     this.props.methodCallOpenModal();
@@ -40,8 +39,6 @@ class Participate extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
-    console.log('this.props.isOpen: ', this.props.isOpen);
-    console.log('this.isOpen: ', this.isOpen);
 
     return (
       <div>
@@ -152,7 +149,6 @@ class Participate extends Component {
 const selector = formValueSelector('participate');
 
 function mapStateToProps(state) {
-  console.log('mapStateToProps');
   return {
     isOpen: state.participate.isOpen,
     modalUsername: '',
