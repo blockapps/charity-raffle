@@ -8,3 +8,6 @@ node_modules
 output
 .babelrc
 *.log
+**/build
+**/package
+**/.DS_Store
