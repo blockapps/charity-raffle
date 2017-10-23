@@ -27,11 +27,13 @@ class NewLottery extends Component {
   submit = (values) => {
     const payload = {
       admin: values.modalUsername,
+      username: values.modalUsername,
+      address: values.modalAddress,
+      password: values.modalPassword,
       args: {
-        address: values.modalAddress,
-        name: values.modalName,
-        numTickets: values.modalValue,
-        ticketPrice: values.modalTicketPrice
+        _name: values.modalName,
+        _ticketCount: values.modalValue,
+        _ticketPrice: values.modalTicketPrice
       }  
     }
     console.log('Submit new lottery', payload);

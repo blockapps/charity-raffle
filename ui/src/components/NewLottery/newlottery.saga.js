@@ -11,9 +11,16 @@ import {
 
 import { uploadContract } from '../../lottery/lottery_mock';
 
+//const compileUrl = env.STRATO_URL + "/extabi";
+//const blocCompileUrl = env.BLOC_URL + "/contracts/compile";
+
+function* newLotteryAPICall(payload) {
+  return yield call(uploadContract,payload);
+}
+
 function* makeNewLotteryRequest(action) {
   try {
-    const response = yield uploadContract(action.admin, action.args);
+    const response = yield newLotteryAPICall(action.payload);
     console.log('Make New Lottery Request');
     console.log(response);
     yield put(newLotterySuccess(response));

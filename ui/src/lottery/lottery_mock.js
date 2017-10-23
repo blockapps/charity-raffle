@@ -26,27 +26,111 @@ const allLotteryData = [
   },
   ];
 
-export function* uploadContract(admin, args) {
+  const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
+  const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
+  const lotteryListUrl = `http://${window.location.hostname}/cirrus/search/Lottery?winnerAddress=eq.0000000000000000000000000000000000000000`;
+  
+  const contractName = "Lottery";
+  const contractSrc = `contract Lottery {
+    address[] public entries;
+    uint public ticketCount;
+    uint public ticketPrice;
+    string public name;
+  
+    uint public winner;
+    address public winnerAddress;
+  
+    function Lottery(string _name, uint _ticketCount, uint _ticketPrice) {
+      // if ticket count < 2 - whats the point
+      if (_ticketCount < 2) {
+        throw;
+      }
+      // all good
+      name = _name;
+      ticketCount = _ticketCount;
+      ticketPrice = _ticketPrice;
+      winnerAddress = 0;
+    }
+  
+    function enter(uint _numTickets) payable returns (bool) {
+      // check if ticket price satisfied
+      if (msg.value < ticketPrice * _numTickets) {
+        return false;
+      }
+      // check capacity
+      if (entries.length > ticketCount - _numTickets) {
+        return false;
+      }
+      // enter the lottery
+      for(uint i=0; i<_numTickets; i++)
+      {
+      entries.push(msg.sender);
+      }
+      // payout
+      if (entries.length >= ticketCount) {
+        return payout();
+      }
+      return true;
+     }
+  
+    /* return a random index into entries */
+    function rand(uint seed) internal returns (uint) {
+      return uint(keccak256(seed)) % entries.length;
+    }
+  
+    function testRand(uint seed) returns (uint) {
+      if (entries.length < 2) {
+        return 99999999;
+      }
+      return rand(seed);
+    }
+  
+    function payout() internal returns (bool){
+      winner = rand(block.number);
+      winnerAddress = entries[winner];
+      winnerAddress.send(this.balance);
+      return true;
+    }
+  }`;
+
+export function uploadContract(payload) {
+  return fetch(
+    uploadUrl.replace(":user", payload.username).replace(":address", payload.address),
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({contract:contractName, value:0, password:payload.password, src:contractSrc, args:payload.args})
+    }
+  )
+  .then(function(response) {
+    return response.json();
+  })
+  .catch(function(error) {
+    throw error;
+  });
+
   //const contract = yield rest.uploadContract(admin, contractName, contractFilename, args);
   //yield compileSearch(contract);
   //contract.src = 'removed';
   //return setContract(admin, contract);
   console.log('uploadContract');
 
-  const contract = {
-    address: args.address,
-    name: args.name,
-    numTickets: args.numTickets,
-    ticketPrice: args.ticketPrice,
-    numSold: 0,
-  };
+  // const contract = {
+  //   address: args.address,
+  //   name: args.name,
+  //   numTickets: args.numTickets,
+  //   ticketPrice: args.ticketPrice,
+  //   numSold: 0,
+  // };
 
-  allLotteryData.push(contract);
+  // allLotteryData.push(contract);
 
-  console.log('Upload Contract');
-  console.log(allLotteryData);
+  // console.log('Upload Contract');
+  // console.log(allLotteryData);
 
-  return contract;
+ // return contract;
 }
 
 export function setContract(admin, contract) {
@@ -74,7 +158,33 @@ function* compileSearch(contract) {
 }
 
 // ================== contract methods ====================
-export function* enter(admin, contract, user) {
+export function enter(payload) {
+  console.log('##################################### enter: ', payload);
+  return fetch(
+    enterUrl
+      .replace(':username', payload.username)
+      .replace(':userAddress', payload.userAddress)
+      .replace(":contractName", payload.contractName)
+      .replace(":contractAddress", payload.contractAddress),
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        password: payload.password,
+        method: payload.methodName,
+        value: payload.value && !isNaN(parseFloat(payload.value)) ? parseFloat(payload.value) : 0,
+        args: payload.args,
+      })
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .catch(function(error) {
+      throw error;
+    });
   //rest.verbose('enter', user);
   //const state = yield rest.getState(contract);
   //const ticketPrice = new BigNumber(state.ticketPrice);
@@ -88,7 +198,7 @@ export function* enter(admin, contract, user) {
   //return success;
   console.log('enter');
 
-  return true;
+ // return true;
 }
 
 export function* testRand(admin, contract, seed) {
@@ -111,13 +221,29 @@ export function* getLottery(address) {
   console.log('getLottery');
 }
 
-export function* getOpen() {
+export function getOpen() {
+  return fetch(
+    lotteryListUrl,
+    {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: {}
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .catch(function(error) {
+      throw error;
+    });
   //const addressZero = '0000000000000000000000000000000000000000';
   //const results = yield rest.query(`${contractName}?winnerAddress=eq.${addressZero}`);
   //return results;
   console.log('getOpen');
 
-  return allLotteryData;
+ // return allLotteryData;
 }
 
 // get all lotteries

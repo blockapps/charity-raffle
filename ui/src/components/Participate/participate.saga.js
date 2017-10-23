@@ -10,10 +10,15 @@ import {
   } from './participate.actions';
   
   import { enter } from '../../lottery/lottery_mock';
-  
+
+function* participateAPICall(payload) {
+    return yield call(enter, payload);
+  }
+
   function* makeParticipateRequest(action) {
-    try {
-      const response = yield enter(action.admin, action.contract, action.user);
+    try 
+    {
+      const response = yield call(participateAPICall,action.payload);
       yield put(participateSuccess(action.key, response));
     }
     catch(err) {

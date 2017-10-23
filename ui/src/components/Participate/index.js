@@ -26,9 +26,16 @@ class Participate extends Component {
  
   submit = (values) => {
     const payload = {
-      admin: this.props.modalUsername,
-      contract: this.props.contractName,
-      user: this.props.modalUsername,
+      username: values.modalUsername,
+      userAddress: values.modalAddress,
+      password: values.modalPassword,
+      contractName: "Lottery",
+      contractAddress: this.props.contractAddress,
+      methodName: "enter",
+      value: values.modalValue * this.props.lotteryData.ticketPrice,
+      args: {
+        _numTickets: values.modalValue,
+      },
     }
     this.props.participateRequest(this.props.lookup, payload);
   }

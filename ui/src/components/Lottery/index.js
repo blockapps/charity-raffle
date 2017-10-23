@@ -11,10 +11,10 @@ class Lottery extends Component {
           <span>{this.props.lotteryData.name}</span>
         </div>
         <div className="col-sm-3">
-          <span>{this.props.lotteryData.numTickets * this.props.lotteryData.ticketPrice} </span>
+          <span>{this.props.lotteryData.ticketCount * this.props.lotteryData.ticketPrice} </span>
         </div>
         <div className="col-sm-3">
-          <span>{this.props.lotteryData.numSold} </span>
+          <span>{this.props.lotteryData.entries.length} </span>
         </div>
         <div className="col-sm-3">
           <Participate
@@ -22,6 +22,7 @@ class Lottery extends Component {
             lookup={'participate' + this.props.lotteryData.address}
             contractName={this.props.lotteryData.name}
             contractAddress={this.props.lotteryData.address}
+            lotteryData={this.props.lotteryData}
           />
         </div>
       </div>

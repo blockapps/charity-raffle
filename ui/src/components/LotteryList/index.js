@@ -20,7 +20,7 @@ class LotteryList extends Component {
     const fetchLotteries = this.props.lotteryListRequest;
     this.timeout = setInterval(function () {
       fetchLotteries();
-    }, 5000);
+    }, 5*1000);
   }
 
   requestLotteryList() {

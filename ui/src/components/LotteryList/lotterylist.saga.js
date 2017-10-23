@@ -11,10 +11,17 @@ import {
   
   import {getOpen} from '../../lottery/lottery_mock'
   
+  //const addressZero = '0000000000000000000000000000000000000000';
+  //const results = yield rest.query(`${contractName}?winnerAddress=eq.${addressZero}`);
+  
+  function* lotteryListAPICall() {
+    return yield call(getOpen);
+    }
+
   function* makeLotteryListRequest(action) {
     try {
         console.log('makeLotteryListRequest');
-      const lotteries = yield getOpen();
+      const lotteries = yield lotteryListAPICall();
       console.log('Make Lottery List Request');
       console.log(lotteries);
       yield put(lotteryListSuccess(lotteries));
