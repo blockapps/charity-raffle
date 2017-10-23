@@ -29,6 +29,8 @@
   const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
   const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
   const lotteryListUrl = `http://${window.location.hostname}/cirrus/search/Lottery?winnerAddress=eq.0000000000000000000000000000000000000000`;
+  const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
+  const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
 
   const contractName = "Lottery";
   const contractSrc = `contract Lottery {
@@ -107,6 +109,19 @@ export function uploadContract(payload) {
   .then(function(response) {
     return response.json();
   })
+  .then((json) => {
+    isCompiled(json.data.contents.codeHash)
+      .then((compiled) => {
+        if(compiled) {
+          return;
+        }
+
+        return compileSearch(contractName, contractSrc);
+      })
+      .then(() => {
+        return json;
+      });
+  })
   .catch(function(error) {
     throw error;
   });
@@ -147,15 +162,46 @@ export function setContract(admin, contract) {
   console.log('setContract');
 }
 
-// function* compileSearch(contract) {
-//   //rest.verbose('compileSearch', contractName);
-//   //if (yield rest.isCompiled(contract.codeHash)) {
-//   //  return;
-//   //}
-//   //const searchable = [contractName];
-//   //yield rest.compileSearch(searchable, contractName, contractFilename);
-//   console.log('compileSearch');
-// }
+export function isCompiled(codeHash) {
+  return fetch(
+    `${cirrusUrl}/contract?codeHash=eq.${codeHash}`,
+    {
+      method: 'GET'
+    }
+  )
+  .then((response) => {
+    return response.json();
+  })
+  .then((json) => {
+    return json.length > 0;
+  })
+  .catch((err) => {
+    return false;
+  })
+}
+
+export function compileSearch(contractName, source) {
+  return fetch(
+    compileUrl,
+    {
+      method: 'POST',
+      headers: {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify([
+        {
+          "contractName": contractName,
+          "source": source,
+          "searchable": [contractName]
+        }
+      ])
+    }
+  )
+  .then((response) => {
+    return response.json();
+  })
+}
 
 // ================== contract methods ====================
 export function enter(payload) {
