@@ -9,7 +9,7 @@ import {
   newLotteryFailure,
 } from './newlottery.actions';
 
-import { uploadContract } from '../../lottery/lottery_mock';
+import { uploadContract } from '../../lottery/lottery';
 
 //const compileUrl = env.STRATO_URL + "/extabi";
 //const blocCompileUrl = env.BLOC_URL + "/contracts/compile";

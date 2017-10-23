@@ -8,12 +8,12 @@ import {
     lotteryListSuccess,
     lotteryListFailure,
   } from './lotterylist.actions';
-  
-  import {getOpen} from '../../lottery/lottery_mock'
-  
+
+  import {getOpen} from '../../lottery/lottery'
+
   //const addressZero = '0000000000000000000000000000000000000000';
   //const results = yield rest.query(`${contractName}?winnerAddress=eq.${addressZero}`);
-  
+
   function* lotteryListAPICall() {
     return yield call(getOpen);
     }
@@ -30,8 +30,7 @@ import {
       yield put(lotteryListFailure(err));
     }
   }
-  
+
   export function* watchLotteryList() {
     yield takeEvery(LOTTERY_LIST_REQUEST, makeLotteryListRequest);
   }
-  

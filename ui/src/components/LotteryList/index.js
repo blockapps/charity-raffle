@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Dialog } from '@blueprintjs/core';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Lottery from '../Lottery';
 import {
   lotteryListRequest,
@@ -55,7 +53,6 @@ class LotteryList extends Component {
   }
 }
 
-const selector = formValueSelector('lotteryList');
 
 function mapStateToProps(state) {
   return {
@@ -64,13 +61,10 @@ function mapStateToProps(state) {
 }
 
 
-const formed = reduxForm({ form: 'lotteryList' })(LotteryList);
 const connected = connect(
   mapStateToProps,
   {
     lotteryListRequest,
   }
-)(formed);
-const routed = withRouter(connected);
-
-export default routed;
+)(LotteryList);
+export default withRouter(connected);

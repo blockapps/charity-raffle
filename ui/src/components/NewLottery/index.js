@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Dialog } from '@blueprintjs/core';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import {
   newLotteryCall,
   newLotteryOpenModal,
@@ -23,7 +23,7 @@ class NewLottery extends Component {
     this.props.reset();
     this.props.newLotteryCloseModal();
   }
- 
+
   submit = (values) => {
     const payload = {
       admin: values.modalUsername,
@@ -34,7 +34,7 @@ class NewLottery extends Component {
         _name: values.modalName,
         _ticketCount: values.modalValue,
         _ticketPrice: values.modalTicketPrice
-      }  
+      }
     }
     console.log('Submit new lottery', payload);
     this.props.newLotteryCall(payload);
@@ -177,7 +177,6 @@ class NewLottery extends Component {
   }
 }
 
-const selector = formValueSelector('newLottery');
 
 function mapStateToProps(state) {
   return {

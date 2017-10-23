@@ -8,15 +8,15 @@ import {
     participateSuccess,
     participateFailure,
   } from './participate.actions';
-  
-  import { enter } from '../../lottery/lottery_mock';
+
+  import { enter } from '../../lottery/lottery';
 
 function* participateAPICall(payload) {
     return yield call(enter, payload);
   }
 
   function* makeParticipateRequest(action) {
-    try 
+    try
     {
       const response = yield call(participateAPICall,action.payload);
       yield put(participateSuccess(action.key, response));
@@ -25,8 +25,7 @@ function* participateAPICall(payload) {
       yield put(participateFailure(action.key, err));
     }
   }
-  
+
   export function* watchParticipate() {
     yield takeEvery(PARTICIPATE_REQUEST, makeParticipateRequest);
   }
-  

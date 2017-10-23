@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import NewLottery from '../NewLottery/';
 import LotteryList from '../LotteryList/';
