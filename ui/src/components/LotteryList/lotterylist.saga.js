@@ -20,10 +20,7 @@ import {
 
   function* makeLotteryListRequest(action) {
     try {
-        console.log('makeLotteryListRequest');
-      const lotteries = yield lotteryListAPICall();
-      console.log('Make Lottery List Request');
-      console.log(lotteries);
+      const lotteries = yield lotteryListAPICall()
       yield put(lotteryListSuccess(lotteries));
     }
     catch(err) {

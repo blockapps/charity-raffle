@@ -9,7 +9,6 @@ import {
 class LotteryList extends Component {
   constructor(props) {
     super(props);
-    console.log('super');
     this.startPoll();
     this.requestLotteryList();
   }

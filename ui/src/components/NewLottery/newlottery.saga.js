@@ -21,8 +21,6 @@ function* newLotteryAPICall(payload) {
 function* makeNewLotteryRequest(action) {
   try {
     const response = yield newLotteryAPICall(action.payload);
-    console.log('Make New Lottery Request');
-    console.log(response);
     yield put(newLotterySuccess(response));
   }
   catch(err) {

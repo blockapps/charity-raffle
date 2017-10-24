@@ -36,7 +36,6 @@ class NewLottery extends Component {
         _ticketPrice: values.modalTicketPrice
       }
     }
-    console.log('Submit new lottery', payload);
     this.props.newLotteryCall(payload);
   }
 

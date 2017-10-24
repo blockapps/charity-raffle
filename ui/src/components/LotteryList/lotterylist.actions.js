@@ -3,7 +3,6 @@ export const LOTTERY_LIST_SUCCESS = 'LOTTERY_LIST_SUCCESS';
 export const LOTTERY_LIST_FAILURE = 'LOTTERY_LIST_FAILURE';
 
 export const lotteryListRequest = function() {
-    console.log('lotteryListRequest');
   return {
     type: LOTTERY_LIST_REQUEST,
   };
