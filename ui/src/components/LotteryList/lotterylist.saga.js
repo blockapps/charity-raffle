@@ -14,13 +14,13 @@ import {
   //const addressZero = '0000000000000000000000000000000000000000';
   //const results = yield rest.query(`${contractName}?winnerAddress=eq.${addressZero}`);
 
-  function* lotteryListAPICall() {
-    return yield call(getOpen);
+  function* lotteryListAPICall(isShowAll) {
+    return yield call(getOpen, isShowAll);
     }
 
   function* makeLotteryListRequest(action) {
     try {
-      const lotteries = yield lotteryListAPICall()
+      const lotteries = yield lotteryListAPICall(action.isShowAll)
       yield put(lotteryListSuccess(lotteries));
     }
     catch(err) {
