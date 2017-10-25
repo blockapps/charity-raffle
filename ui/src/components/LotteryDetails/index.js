@@ -30,7 +30,7 @@ class LotteryDetails extends Component {
             <Button
               className="pt-minimal pt-small pt-intent-primary"
               onClick={()=>this.props.history.goBack()}>
-              {"< back"}
+              Back
             </Button>
           </div>
         </div>
