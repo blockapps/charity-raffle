@@ -48,12 +48,12 @@ class LotteryList extends Component {
               <h3>{this.state.showAll? "Lotteries":"Lotteries in Progress"}</h3>
             </div>
             <div className="col-sm-2">
-              <Switch className="row text-right" checked={this.props.showAll} onChange={(e)=>{
+              <Switch style={{float:'right',marginRight:10, marginTop: 20}} label='Show all' className="row text-right" checked={this.props.showAll} onChange={(e)=>{
                 this.setState({showAll:!this.state.showAll},()=>{
                   this.props.lotteryListRequest(this.state.showAll)
                   this.props.showAllLotteries(this.state.showAll)
                 })
-                }} />
+              }} />
             </div>
           </div>
         </div>
