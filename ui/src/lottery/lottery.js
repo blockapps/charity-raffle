@@ -29,6 +29,7 @@
   const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
   const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
   const lotteryListUrl = `http://${window.location.hostname}/cirrus/search/Lottery?winnerAddress=eq.0000000000000000000000000000000000000000`;
+  const lotteryListUrlAll = `http://${window.location.hostname}/cirrus/search/Lottery`;
   const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
   const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
 
@@ -267,9 +268,10 @@ export function getLottery(address) {
   console.log('getLottery');
 }
 
-export function getOpen() {
+export function getOpen(isShowAll) {
+  const URL = isShowAll? lotteryListUrlAll:lotteryListUrl
   return fetch(
-    lotteryListUrl,
+    URL,
     {
       method: 'GET',
       headers: {
