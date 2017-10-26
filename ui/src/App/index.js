@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <nav className="pt-navbar" >
           <div className="pt-navbar-group pt-align-left">
-            <div className="pt-navbar-heading">Richie Rich</div>
+            <div className="pt-navbar-heading">Demo Lottery App</div>
           </div>
         </nav>
         <main>

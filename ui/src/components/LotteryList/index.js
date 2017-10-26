@@ -62,7 +62,7 @@ class LotteryList extends Component {
             <strong>Name</strong>
           </div>
           <div className="col-sm-2">
-            <strong>Prize</strong>
+            <strong>Prize Amount</strong>
           </div>
           <div className="col-sm-2">
             <strong>Tickets Sold</strong>

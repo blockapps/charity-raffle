@@ -222,7 +222,7 @@ export function enter(payload) {
       body: JSON.stringify({
         password: payload.password,
         method: payload.methodName,
-        value: payload.value && !isNaN(parseFloat(payload.value)) ? parseFloat(payload.value) : 0,
+        value: payload.value && !isNaN(parseFloat(payload.value)) ? payload.value : 0,
         args: payload.args,
       })
     })

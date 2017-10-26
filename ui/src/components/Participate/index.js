@@ -15,6 +15,7 @@ class Participate extends Component {
     e.stopPropagation();
     e.preventDefault();
     this.props.participateOpenModal(this.props.lookup);
+    console.log(this.props.lotteryData);
   }
 
   handleCloseModal = (e) => {
@@ -23,7 +24,7 @@ class Participate extends Component {
     this.props.reset();
     this.props.participateCloseModal(this.props.lookup);
   }
- 
+
   submit = (values) => {
     const payload = {
       username: values.modalUsername,
