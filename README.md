@@ -11,15 +11,15 @@ You will need the an instance of STRATO. Follow the instructions in the [STRATO 
 The STRATO platform expects a zip archive with the following structure:
 
 ```
-.
-|--\contracts
-|  |--contract1.sol
-|  |--contract2.sol
-|--\ui
-|  |--index.html
-|  |--(any other static js or css files)
-|--metadata.json
-
+.zip
+├─ contracts/
+│   └─ ...all solidity contract files (*.sol)
+│
+├─ ui/
+│   ├─ index.html
+│   └─ ...other ui application files used by index.html
+│
+└─ metadata.json
 ```
 
 Running the following commands will generate the directory structure and the zip archive under the `build` folder.
