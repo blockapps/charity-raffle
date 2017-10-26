@@ -33,7 +33,7 @@ class Participate extends Component {
       contractName: "Lottery",
       contractAddress: this.props.contractAddress,
       methodName: "enter",
-      value: values.modalValue * this.props.lotteryData.ticketPrice,
+      value: values.modalValue * this.props.lotteryData.ticketPrice * 100000000000000000000, //convert to ether
       args: {
         _numTickets: values.modalValue,
       },
