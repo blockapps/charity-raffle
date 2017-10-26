@@ -2,7 +2,7 @@
 
 This is a demo dApp built to be deployable on the [BlockApps STRATO](http://blockapps.net/blockapps-strato-blockchain-application-development/) platform. The app consists of a lottery smart contract and a react user interface. Any user can initiate the creation of a lottery contract. The user determines the number of total tickets and the price per ticket when deploying the smart contract. Various users can purchase these tickets. The lottery is closed and a winner is picked once the total number of participants is reached.
 
-Read the [documentation](https://developers.blockapps.net/advanced/launch-a-dapp/) for more information on creating dApps using [BlockApps STRATO](http://blockapps.net/blockapps-strato-blockchain-application-development/).
+Read the [documentation](https://developers.blockapps.net/advanced/launch-dapp/) for more information on creating dApps using [BlockApps STRATO](http://blockapps.net/blockapps-strato-blockchain-application-development/).
 
 ## Pre-requisites
 You will need the an instance of STRATO. Follow the instructions in the [STRATO getting started guide](https://github.com/blockapps/strato-getting-started) to install a local instance.
