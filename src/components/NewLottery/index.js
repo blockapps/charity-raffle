@@ -41,7 +41,14 @@ class NewLottery extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
-
+    const error = this.props.failure  && 
+                (<div className="row">
+                  <div className="col-sm-12">
+                    <label className="pt-label" style={{marginTop: '5px', color:'red'}}>
+                      Failed to create lottery with error: {this.props.failure}
+                    </label>
+                  </div>
+                </div>) 
     return (
       <div>
         <Button
@@ -58,6 +65,7 @@ class NewLottery extends Component {
             title={"Create new lottery"}
           >
             <div className="pt-dialog-body">
+              {error}
               <div className="row">
                 <div className="col-sm-3">
                   <label className="pt-label" style={{marginTop: '5px'}}>
@@ -130,13 +138,18 @@ class NewLottery extends Component {
                   </label>
                 </div>
                 <div className="col-sm-9 smd-pad-4">
-                  <Field
-                    name="modalValue"
-                    className="pt-input"
-                    component="input"
-                    type="number"
-                    required
-                  />
+                  <div className="pt-form-group">
+                    <div className="pt-form-content">
+                      <Field
+                        name="modalValue"
+                        className="pt-input"
+                        component="input"
+                        type="number"
+                        required
+                      />
+                      <div className="pt-form-helper-text">Must be > 1</div>  
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="row">
@@ -160,7 +173,7 @@ class NewLottery extends Component {
               <div className="pt-dialog-footer-actions">
                 <Button text="Cancel" onClick={this.handleCloseModal} />
                 <button
-                  disabled={this.props.pristine || this.props.submitting}
+                  disabled={this.props.pristine || this.props.submitting || !this.props.valid}
                   className="pt-button pt-intent-primary"
                   type="button"
                   onClick={handleSubmit(this.submit)}
@@ -180,12 +193,21 @@ class NewLottery extends Component {
 function mapStateToProps(state) {
   return {
     isOpen: state.newLottery.isOpen,
+    failure: state.newLottery.failure,
     modalUsername: '',
   };
 }
 
+function validate (values) {
+  const errors = {};
+  if (values.modalValue < 2) {
+    errors.modalValue = "Must have more than 1 ticket in lottery";
+  }
+  return errors;
 
-const formed = reduxForm({ form: 'newLottery' })(NewLottery);
+}
+
+const formed = reduxForm({ form: 'newLottery' , validate})(NewLottery);
 const connected = connect(
   mapStateToProps,
   {

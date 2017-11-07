@@ -23,15 +23,17 @@ import {
         }
       case NEW_LOTTERY_REQUEST:
         return {
-          isOpen: false,
+          // TODO: Add a loading icon until success or failure
+          isOpen: true,
         }
       case NEW_LOTTERY_SUCCESS:
         return {
           isOpen: false,
         }
       case NEW_LOTTERY_FAILURE:
-        return {
-          isOpen: false,
+      return {
+          isOpen: true,
+          failure: action.result,
         }
       default:
         return state;

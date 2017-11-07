@@ -97,35 +97,44 @@
   }`;
 
 export function uploadContract(payload) {
-  return fetch(
-    uploadUrl.replace(":user", payload.username).replace(":address", payload.address),
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({contract:contractName, value:0, password:payload.password, src:contractSrc, args:payload.args})
-    }
-  )
-  .then(function(response) {
-    return response.json();
-  })
-  .then((json) => {
-    isCompiled(json.data.contents.codeHash)
-      .then((compiled) => {
-        if(compiled) {
-          return;
-        }
+  const url = uploadUrl.replace(":user", payload.username).replace(":address", payload.address);
+  const body = JSON.stringify({contract:contractName, value:0, password:payload.password, src:contractSrc, args:payload.args});
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: body
+  };
+  return fetch(url,options)
+    .then(function(response) {
+      if(response.ok) {
+        return response.json();
+      }
+      return response.text()
+        .then((msg) => {
+          if (msg === "") {
+            throw `Error ${response.status} from POST to ${response.url}`
+          }
+          throw msg
+        });
+    })
+    .then((json) => {
+      isCompiled(json.data.contents.codeHash)
+        .then((compiled) => {
+          if(compiled) {
+            return;
+          }
 
-        return compileSearch(contractName, contractSrc);
-      })
-      .then(() => {
-        return json;
-      });
-  })
-  .catch(function(error) {
-    throw error;
-  });
+          return compileSearch(contractName, contractSrc);
+        })
+        .then(() => {
+          return json;
+        });
+    })
+    .catch(function(error) {
+      throw error;
+    });
 
   //const contract = yield rest.uploadContract(admin, contractName, contractFilename, args);
   //yield compileSearch(contract);
