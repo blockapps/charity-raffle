@@ -15,9 +15,9 @@ The STRATO platform expects a zip archive with the following structure:
 ├─ contracts/
 │   └─ ...all solidity contract files (*.sol)
 │
-├─ ui/
-│   ├─ index.html
-│   └─ ...other ui application files used by index.html
+├─ index.html
+│
+├─ ...other ui application files used by index.html
 │
 └─ metadata.json
 ```
@@ -25,14 +25,13 @@ The STRATO platform expects a zip archive with the following structure:
 Running the following commands will generate the directory structure and the zip archive under the `build` folder.
 
 ```
-cd ui
 npm install
 npm run build
 ```
 
-The data in `metadata.json` is populated from `ui/package.json`.
+The data in `metadata.json` is populated from `package.json`.
 
-This zip archive under `ui/build/app.zip` can be uploaded directly to STRATO.
+This zip archive under `build/app.zip` can be uploaded directly to STRATO.
 
 ## Deploying on STRATO
 Perform the following steps to deploy this demo app on STRATO.
