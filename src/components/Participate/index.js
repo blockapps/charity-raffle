@@ -43,6 +43,14 @@ class Participate extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
+    const error = this.props.failure  && 
+                (<div className="row">
+                  <div className="col-sm-12">
+                    <label className="pt-label" style={{marginTop: '5px', color:'red'}}>
+                      Failed to participate in lottery with error: {this.props.failure}
+                    </label>
+                  </div>
+                </div>) 
 
     return (
       <div>
@@ -60,6 +68,7 @@ class Participate extends Component {
             title={"Enter " + this.props.contractName}
           >
             <div className="pt-dialog-body">
+              {error}
               <div className="row">
                 <div className="col-sm-3">
                   <label className="pt-label" style={{marginTop: '5px'}}>
@@ -153,7 +162,8 @@ function mapStateToProps(state,ownProps) {
     modal: state.participate.modals
       && state.participate.modals[ownProps.lookup] ?
       state.participate.modals[ownProps.lookup] : {},
-    modalUsername: selector(state, 'modalUsername')
+    modalUsername: selector(state, 'modalUsername'),
+    failure: state.participate.failure,
   };
 }
 

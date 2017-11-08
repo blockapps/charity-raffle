@@ -41,7 +41,7 @@ import {
           ...state.modals,
           [action.key] : {
               ...state.modals[action.key],
-              isOpen: false,
+              isOpen: true,
               result: 'Waiting for method to be called...'
             }
         }
@@ -63,11 +63,12 @@ import {
           ...state.modals,
           [action.key] : {
               ...state.modals[action.key],
-              isOpen: false,
+              isOpen: true,
               result: 'Waiting for method to be called...'
             }
+          },
+          failure: action.result,
         }
-      }
       default:
         return state;
     }

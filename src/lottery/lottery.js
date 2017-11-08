@@ -97,35 +97,44 @@
   }`;
 
 export function uploadContract(payload) {
-  return fetch(
-    uploadUrl.replace(":user", payload.username).replace(":address", payload.address),
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({contract:contractName, value:0, password:payload.password, src:contractSrc, args:payload.args})
-    }
-  )
-  .then(function(response) {
-    return response.json();
-  })
-  .then((json) => {
-    isCompiled(json.data.contents.codeHash)
-      .then((compiled) => {
-        if(compiled) {
-          return;
-        }
+  const url = uploadUrl.replace(":user", payload.username).replace(":address", payload.address);
+  const body = JSON.stringify({contract:contractName, value:0, password:payload.password, src:contractSrc, args:payload.args});
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: body
+  };
+  return fetch(url,options)
+    .then(function(response) {
+      if(response.ok) {
+        return response.json();
+      }
+      return response.text()
+        .then((msg) => {
+          if (msg === "") {
+            throw `Error ${response.status} from POST to ${response.url}`
+          }
+          throw msg
+        });
+    })
+    .then((json) => {
+      isCompiled(json.data.contents.codeHash)
+        .then((compiled) => {
+          if(compiled) {
+            return;
+          }
 
-        return compileSearch(contractName, contractSrc);
-      })
-      .then(() => {
-        return json;
-      });
-  })
-  .catch(function(error) {
-    throw error;
-  });
+          return compileSearch(contractName, contractSrc);
+        })
+        .then(() => {
+          return json;
+        });
+    })
+    .catch(function(error) {
+      throw error;
+    });
 
   //const contract = yield rest.uploadContract(admin, contractName, contractFilename, args);
   //yield compileSearch(contract);
@@ -207,45 +216,39 @@ export function compileSearch(contractName, source) {
 // ================== contract methods ====================
 export function enter(payload) {
   // console.log('##################################### enter: ', payload);
-  return fetch(
-    enterUrl
-      .replace(':username', payload.username)
-      .replace(':userAddress', payload.userAddress)
-      .replace(":contractName", payload.contractName)
-      .replace(":contractAddress", payload.contractAddress),
-    {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        password: payload.password,
-        method: payload.methodName,
-        value: payload.value && !isNaN(parseFloat(payload.value)) ? payload.value : 0,
-        args: payload.args,
-      })
-    })
+  const url = enterUrl.replace(':username', payload.username)
+                      .replace(':userAddress', payload.userAddress)
+                      .replace(":contractName", payload.contractName)
+                      .replace(":contractAddress", payload.contractAddress);
+  const body = JSON.stringify({
+    password: payload.password,
+    method: payload.methodName,
+    value: payload.value && !isNaN(parseFloat(payload.value)) ? payload.value : 0,
+    args: payload.args,
+  });
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: body
+  };
+  return fetch(url,options)
     .then(function(response) {
-      return response.json();
+      if(response.ok) {
+        return response.json();
+      }
+      return response.text()
+        .then((msg) => {
+          if (msg === "") {
+            throw `Error ${response.status} from POST to ${response.url}`
+          }
+          throw msg
+        });
     })
     .catch(function(error) {
       throw error;
     });
-  //rest.verbose('enter', user);
-  //const state = yield rest.getState(contract);
-  //const ticketPrice = new BigNumber(state.ticketPrice);
-
-  //// function enter() payable return (bool) {
-  //const method = 'enter';
-  //const args = {};
-  //const value = ticketPrice.toFixed();
-  //const result = yield rest.callMethod(user, contract, method, args, value);
-  //const success = (result[0] === true);
-  //return success;
-  // console.log('enter');
-
- // return true;
 }
 
 export function* testRand(admin, contract, seed) {
