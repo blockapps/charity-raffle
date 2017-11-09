@@ -9,7 +9,7 @@ import {compileSearch} from '../lottery/lottery';
 
 function* compileLotteryContract(action) {
   try {
-    const compilation = yield compileSearch();
+    yield compileSearch();
   }
   catch(err) {
     // dont do anything

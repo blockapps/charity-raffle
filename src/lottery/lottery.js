@@ -114,9 +114,9 @@ export function uploadContract(payload) {
       return response.text()
         .then((msg) => {
           if (msg === "") {
-            throw `Error ${response.status} from POST to ${response.url}`
+            throw new Error(`Error ${response.status} from POST to ${response.url}`)
           }
-          throw msg
+          throw new Error(msg)
         });
     })
     .then((json) => {
@@ -241,7 +241,7 @@ export function enter(payload) {
       return response.text()
         .then((msg) => {
           if (msg === "") {
-            throw `Error ${response.status} from POST to ${response.url}`
+            throw new Error(`Error ${response.status} from POST to ${response.url}`)
           }
           throw msg
         });
