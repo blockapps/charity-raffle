@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { getLotteryDetails } from './selectors';
-import {
-  lotteryListRequest,
-} from '../LotteryList/lotterylist.actions';
 import { Button } from '@blueprintjs/core';
 
 class LotteryDetails extends Component {
-  constructor(props) {
-    super(props);
-    console.log("show all on details: ", props.showAll)
-    this.requestLotteryList();
-  }
-
-  requestLotteryList() {
-    this.props.lotteryListRequest(this.props.showAll);
-  }
 
   render() {
-    console.log('Details Log: ',this.props)
     const lottery = this.props.lottery
     const progressPercent = lottery ? ((lottery.entries.length / lottery.ticketCount) * 100) : 0
     const hasWinner = lottery && ((lottery.ticketCount - lottery.entries.length)<=0)
@@ -60,16 +46,10 @@ class LotteryDetails extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return {
-    lottery: getLotteryDetails(state, props.match.params.name),
-    showAll: state.lotteryList.showAll
-  }
 }
 
 const connected = connect(
-  mapStateToProps,
-  {
-    lotteryListRequest,
-  }
+  mapStateToProps
 )(LotteryDetails);
+
 export default withRouter(connected);

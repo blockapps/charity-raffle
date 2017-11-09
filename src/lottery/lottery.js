@@ -190,7 +190,7 @@ export function isCompiled(codeHash) {
   })
 }
 
-export function compileSearch(contractName, source) {
+export function compileSearch() {
   return fetch(
     compileUrl,
     {
@@ -202,7 +202,7 @@ export function compileSearch(contractName, source) {
       body: JSON.stringify([
         {
           "contractName": contractName,
-          "source": source,
+          "source": contractSrc,
           "searchable": [contractName]
         }
       ])

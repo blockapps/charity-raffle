@@ -11,7 +11,7 @@ class Lottery extends Component {
         <div className="col-sm-2">
           <Link
             className="pt-minimal pt-small pt-intent-primary"
-            to={`/details/${this.props.lotteryData.name}`}>
+            to={`/details/${this.props.lotteryData.address}`}>
             {this.props.lotteryData.name}
           </Link>
         </div>

@@ -37,9 +37,9 @@ class LotteryList extends Component {
   }
 
   render() {
-    const lotteries = this.props.lotteries.map((item, i) =>{
+    const lotteries = this.props.lotteries ? this.props.lotteries.map((item, i) =>{
       return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll}/>)
-    });
+    }) : [];
     return (
       <div className="container-fluid">
         <div className="row lt-v-">

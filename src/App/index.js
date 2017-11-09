@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import {routes as scenes} from '../routes';
 import 'normalize.css/normalize.css';
 import '@blueprintjs/core/dist/blueprint.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+import { appInitCompileContract } from './app.actions';
+
 class App extends Component {
+
+  componentWillMount() {
+    appInitCompileContract();
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,4 +30,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const connected = connect(
+  () => {}, // empty mapStateToProps
+  {
+    appInitCompileContract
+  })(App);
+
+export default connected;

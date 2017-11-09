@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {reducer as formReducer} from 'redux-form';
 import {Provider} from 'react-redux';
-import {HashRouter as Router} from 'react-router-dom'
+import {HashRouter as Router} from 'react-router-dom';
 import {
     createStore,
     applyMiddleware,
@@ -22,6 +22,7 @@ import {unregister as unregisterServiceWorker} from './registerServiceWorker';
 import { watchLotteryList } from './components/LotteryList/lotterylist.saga';
 import { watchNewLottery } from './components/NewLottery/newlottery.saga';
 import { watchParticipate } from './components/Participate/participate.saga';
+import { watchAppInit } from './App/app.saga';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -37,8 +38,9 @@ const rootSaga = function* startForeman() {
         // YOUR SAGAS HERE
         fork(watchLotteryList),
         fork(watchNewLottery),
-        fork(watchParticipate)
-    ]
+        fork(watchParticipate),
+        fork(watchAppInit)
+    ];
 };
 
 const sagaMiddleware = createSagaMiddleware();
