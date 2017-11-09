@@ -13,7 +13,7 @@ import {
       case LOTTERY_LIST_SUCCESS:
         return {
           ...state,
-            lotteries: action.lotteries,
+          lotteries: action.lotteries,
         }
       case SHOW_ALL_LOTTERIES:
         return {

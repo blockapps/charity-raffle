@@ -11,7 +11,7 @@ import { appInitCompileContract } from './app.actions';
 class App extends Component {
 
   componentWillMount() {
-    appInitCompileContract();
+    this.props.appInitCompileContract();
   }
 
   render() {
@@ -31,7 +31,7 @@ class App extends Component {
 }
 
 const connected = connect(
-  () => {}, // empty mapStateToProps
+  () => { return {} }, // empty mapStateToProps
   {
     appInitCompileContract
   })(App);

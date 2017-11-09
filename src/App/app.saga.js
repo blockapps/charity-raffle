@@ -1,5 +1,6 @@
 import {
-  takeLatest
+  takeLatest,
+  call
 } from 'redux-saga/effects';
 import {
   APP_INIT_COMPILE_CONTRACT
@@ -9,7 +10,7 @@ import {compileSearch} from '../lottery/lottery';
 
 function* compileLotteryContract(action) {
   try {
-    yield compileSearch();
+    yield call(compileSearch);
   }
   catch(err) {
     // dont do anything
