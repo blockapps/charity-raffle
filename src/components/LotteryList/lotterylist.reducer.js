@@ -1,5 +1,5 @@
 import {
-    LOTTERY_LIST_SUCCESS, SHOW_ALL_LOTTERIES
+    LOTTERY_LIST_SUCCESS, TOGGLE_SHOW_COMPLETED
   } from './lotterylist.actions';
 
   const initialState = {
@@ -15,10 +15,10 @@ import {
           ...state,
           lotteries: action.lotteries,
         }
-      case SHOW_ALL_LOTTERIES:
+      case TOGGLE_SHOW_COMPLETED:
         return {
           ...state,
-          showAll: action.value,
+          showAll: !state.showAll,
         }
       default:
         return state;
