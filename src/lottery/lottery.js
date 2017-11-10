@@ -114,9 +114,9 @@ export function uploadContract(payload) {
       return response.text()
         .then((msg) => {
           if (msg === "") {
-            throw `Error ${response.status} from POST to ${response.url}`
+            throw new Error(`Error ${response.status} from POST to ${response.url}`)
           }
-          throw msg
+          throw new Error(msg)
         });
     })
     .then((json) => {
@@ -190,7 +190,7 @@ export function isCompiled(codeHash) {
   })
 }
 
-export function compileSearch(contractName, source) {
+export function compileSearch() {
   return fetch(
     compileUrl,
     {
@@ -202,7 +202,7 @@ export function compileSearch(contractName, source) {
       body: JSON.stringify([
         {
           "contractName": contractName,
-          "source": source,
+          "source": contractSrc,
           "searchable": [contractName]
         }
       ])
@@ -241,7 +241,7 @@ export function enter(payload) {
       return response.text()
         .then((msg) => {
           if (msg === "") {
-            throw `Error ${response.status} from POST to ${response.url}`
+            throw new Error(`Error ${response.status} from POST to ${response.url}`)
           }
           throw msg
         });
@@ -266,9 +266,11 @@ export function* testRand(admin, contract, seed) {
 
 // ================== wrapper methods ====================
 export function getLottery(address) {
-  //const results = (yield rest.waitQuery(`${contractName}?address=eq.${address}`, 1, 3*60*1000))[0];
-  //return results;
-  console.log('getLottery');
+  // const results = (yield rest.waitQuery(`${contractName}?address=eq.${address}`, 1, 3*60*1000));
+  // if(results.length === 0) {
+  //   throw new Error("Not found");
+  // }
+  // return results[0];
 }
 
 export function getOpen(isShowAll) {

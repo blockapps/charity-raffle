@@ -16,7 +16,7 @@ import {
 
   function* lotteryListAPICall(isShowAll) {
     return yield call(getOpen, isShowAll);
-    }
+  }
 
   function* makeLotteryListRequest(action) {
     try {

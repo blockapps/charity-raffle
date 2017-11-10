@@ -7,6 +7,6 @@ import LotteryDetails from './components/LotteryDetails/';
 export const routes = (
   <Switch>
     <Route exact path="/" component={Dashboard}/>
-    <Route path="/details/:name" component={LotteryDetails}/>
+    <Route exact path="/details/:address" component={LotteryDetails}/>
   </Switch>
 );
