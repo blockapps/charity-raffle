@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mkdir package &&  mkdir package/contracts && mkdir package/ui && node scripts/create-metadata.js && mv build/* package/ui/  && cd package && zip -r app.zip * && cd .. && rm -rf build && mv package build",
+    "build": "react-scripts build && mkdir package &&  mkdir package/contracts && node scripts/create-metadata.js && mv build/* package/  && cd package && zip -r app.zip * && cd .. && rm -rf build && mv package build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
