@@ -266,9 +266,11 @@ export function* testRand(admin, contract, seed) {
 
 // ================== wrapper methods ====================
 export function getLottery(address) {
-  //const results = (yield rest.waitQuery(`${contractName}?address=eq.${address}`, 1, 3*60*1000))[0];
-  //return results;
-  console.log('getLottery');
+  // const results = (yield rest.waitQuery(`${contractName}?address=eq.${address}`, 1, 3*60*1000));
+  // if(results.length === 0) {
+  //   throw new Error("Not found");
+  // }
+  // return results[0];
 }
 
 export function getOpen(isShowAll) {

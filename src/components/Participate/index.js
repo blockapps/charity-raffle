@@ -15,7 +15,6 @@ class Participate extends Component {
     e.stopPropagation();
     e.preventDefault();
     this.props.participateOpenModal(this.props.lookup);
-    console.log(this.props.lotteryData);
   }
 
   handleCloseModal = (e) => {
@@ -43,14 +42,14 @@ class Participate extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
-    const error = this.props.failure  && 
+    const error = this.props.failure  &&
                 (<div className="row">
                   <div className="col-sm-12">
                     <label className="pt-label" style={{marginTop: '5px', color:'red'}}>
                       Failed to participate in lottery with error: {this.props.failure}
                     </label>
                   </div>
-                </div>) 
+                </div>)
 
     return (
       <div>

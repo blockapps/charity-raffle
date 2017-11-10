@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 import {routes as scenes} from '../routes';
@@ -36,4 +37,4 @@ const connected = connect(
     appInitCompileContract
   })(App);
 
-export default connected;
+export default withRouter(connected);

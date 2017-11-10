@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Participate from '../Participate/';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class Lottery extends Component {
 
@@ -41,4 +41,4 @@ class Lottery extends Component {
   }
 }
 
-export default Lottery;
+export default withRouter(Lottery);
