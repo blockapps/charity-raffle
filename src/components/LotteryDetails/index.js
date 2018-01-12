@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
-import {Button} from '@blueprintjs/core';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Button } from '@blueprintjs/core';
+import './LotteryDetails.css';
 
 class LotteryDetails extends Component {
 
@@ -11,7 +12,7 @@ class LotteryDetails extends Component {
       return l.address === this.props.address
     });
 
-    if(filtered.length === 0) {
+    if (filtered.length === 0) {
       return (
         <div className="row">
           <div className="col-12 text-center">
@@ -41,69 +42,55 @@ class LotteryDetails extends Component {
                 <h3>{lottery && lottery.name}</h3>
               </div>
             </div>
-            <div className="row" style={{
-                paddingTop: 8
-              }}>
-              <div className="col-sm-4">
+            <div className="row ld-pad-8 align-progress-bar">
+              <div className="col-sm-4 col-xs-5">
                 <strong>Progress:</strong>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-7">
                 <div className="pt-progress-bar pt-intent-success modifier pt-no-stripes">
-                  <div className="pt-progress-meter" style={{
-                      width: `${progressPercent}%`
-                    }}></div>
+                  <div className="pt-progress-meter" style={{ width: `${progressPercent}%` }}></div>
                 </div>
               </div>
             </div>
-            <div className="row" style={{
-                paddingTop: 15
-              }}>
-              <div className="col-sm-4">
+            <div className="row ld-pad-8">
+              <div className="col-sm-4 col-xs-5">
                 <strong>Tickets Count:</strong>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-7">
                 <span>{lottery && lottery.ticketCount}</span>
               </div>
             </div>
-            <div className="row" style={{
-                paddingTop: 15
-              }}>
-              <div className="col-sm-4">
+            <div className="row ld-pad-8">
+              <div className="col-sm-4 col-xs-5">
                 <strong>Price/Ticket:</strong>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-7">
                 <span>{lottery && lottery.ticketPrice}</span>
               </div>
             </div>
             {
-              hasWinner && <div className="row" style={{
-                    paddingTop: 15
-                  }}>
-                  <div className="col-sm-4">
-                    <strong>Winner Address:</strong>
-                  </div>
-                  <div className="col-sm-8">
-                    <span>{lottery && lottery.winnerAddress}</span>
-                  </div>
+              hasWinner && <div className="row ld-pad-8">
+                <div className="col-sm-4 col-xs-5">
+                  <strong>Winner Address:</strong>
                 </div>
+                <div className="col-sm-8 col-xs-7">
+                  <span>{lottery && lottery.winnerAddress}</span>
+                </div>
+              </div>
             }
-            <div className="row" style={{
-                paddingTop: 15
-              }}>
-              <div className="col-sm-4">
+            <div className="row ld-pad-8">
+              <div className="col-sm-4 col-xs-5">
                 <strong>Tickets Sold:</strong>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-7">
                 <span>{lottery && lottery.entries.length}</span>
               </div>
             </div>
-            <div className="row" style={{
-                paddingTop: 15
-              }}>
-              <div className="col-sm-4">
+            <div className="row ld-pad-8">
+              <div className="col-sm-4 col-xs-5">
                 <strong>Tickets Left:</strong>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-7">
                 <span>{lottery && (lottery.ticketCount - lottery.entries.length)}</span>
               </div>
             </div>

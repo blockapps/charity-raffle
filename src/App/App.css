@@ -1,4 +1,3 @@
-
 body {
   font-family: 'Roboto', sans-serif !important;
 }
@@ -9,4 +8,17 @@ body {
 
 .border-below {
   border-bottom: 1px solid #ddd;
+}
+
+.ld-pad-8 {
+  padding: 8px;
+}
+
+@media (max-width: 767px) {
+  .custom-dialog {
+    width: 90% !important;
+  }
+  .custom-dialog input {
+    width: 100% !important;
+  }
 }
