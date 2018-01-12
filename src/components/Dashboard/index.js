@@ -8,7 +8,7 @@ import LotteryList from '../LotteryList/';
 class Dashboard extends Component {
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="row">
           <div className="col-sm-12 text-right lt-v-pad-8">
             <NewLottery />

@@ -8,7 +8,7 @@ import {
   participateOpenModal,
   participateCloseModal
 } from './participate.actions';
-
+import './participate.css'
 class Participate extends Component {
 
   handleOpenModal = (e) => {
@@ -52,9 +52,9 @@ class Participate extends Component {
                 </div>)
 
     return (
-      <div>
+      <div className="participate">
         <Button
-          className="pt-minimal pt-small pt-intent-primary"
+          className="pt-minimal pt-small pt-intent-primary participate-button"
           onClick={this.handleOpenModal}
         >
           Participate
