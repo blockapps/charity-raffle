@@ -40,7 +40,7 @@ class LotteryList extends Component {
         <div className="row lt-v-">
           <div className="row">
             <div className="col-sm-10 col-xs-7">
-              <h3>{this.props.showAll ? "Lotteries" : "Lotteries in Progress"}</h3>
+              <h3>Lotteries</h3>
             </div>
             <div className="col-sm-2 col-xs-5">
               <Switch style={{ float: 'right', marginRight: 10, marginTop: 20 }} label='Show all' className="row text-right" checked={this.props.showAll} onChange={(e) => {
