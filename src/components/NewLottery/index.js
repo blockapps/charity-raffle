@@ -63,6 +63,7 @@ class NewLottery extends Component {
             isOpen={this.props.isOpen}
             onClose={this.handleCloseModal}
             title={"Create new lottery"}
+            className="custom-dialog"
           >
             <div className="pt-dialog-body">
               {error}
@@ -76,6 +77,7 @@ class NewLottery extends Component {
                     <Field
                       className="pt-input"
                       name="modalUsername"
+                      placeholder="Username"
                       component="input"
                       type="text"
                       required
@@ -90,8 +92,9 @@ class NewLottery extends Component {
                 </div>
                 <div className="col-sm-9 smd-pad-4">
                     <Field
-                      className="pt-input"
                       component="input"
+                      className="pt-input"
+                      placeholder="Address"
                       type="text"
                       name="modalAddress"
                       required
@@ -126,6 +129,7 @@ class NewLottery extends Component {
                       className="pt-input"
                       component="input"
                       type="text"
+                      placeholder="Lottery Name"
                       name="modalName"
                       required
                     />
@@ -163,6 +167,7 @@ class NewLottery extends Component {
                     name="modalTicketPrice"
                     className="pt-input"
                     component="input"
+                    placeholder="Price"
                     type="number"
                     required
                   />

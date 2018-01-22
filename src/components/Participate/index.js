@@ -8,7 +8,7 @@ import {
   participateOpenModal,
   participateCloseModal
 } from './participate.actions';
-
+import './participate.css'
 class Participate extends Component {
 
   handleOpenModal = (e) => {
@@ -52,9 +52,9 @@ class Participate extends Component {
                 </div>)
 
     return (
-      <div>
+      <div className="participate">
         <Button
-          className="pt-minimal pt-small pt-intent-primary"
+          className="pt-minimal pt-small pt-intent-primary participate-button"
           onClick={this.handleOpenModal}
         >
           Participate
@@ -65,6 +65,7 @@ class Participate extends Component {
             isOpen={this.props.modal.isOpen}
             onClose={this.handleCloseModal}
             title={"Enter " + this.props.contractName}
+            className="custom-dialog"
           >
             <div className="pt-dialog-body">
               {error}
@@ -79,6 +80,7 @@ class Participate extends Component {
                       className="pt-input"
                       name="modalUsername"
                       component="input"
+                      placeholder="Username"
                       type="text"
                       required
                     />
@@ -94,6 +96,7 @@ class Participate extends Component {
                     <Field
                       className="pt-input"
                       component="input"
+                      placeholder="Address"
                       type="text"
                       name="modalAddress"
                       required
@@ -128,6 +131,7 @@ class Participate extends Component {
                     name="modalValue"
                     className="pt-input"
                     component="input"
+                    placeholder="Number"
                     type="number"
                     required
                   />
