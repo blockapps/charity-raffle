@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
-import {routes as scenes} from '../routes';
+import { routes as scenes } from '../routes';
 import { FontIcon, Button, NavigationDrawer } from 'react-md';
 import NewLottery from '../components/NewLottery';
 // import 'normalize.css/normalize.css';

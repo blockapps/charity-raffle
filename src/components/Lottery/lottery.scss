@@ -1,0 +1,35 @@
+.lottery {
+  width: 250px;
+  float: left; 
+  margin: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.lottery-title {
+  display: block;
+  background: #949393;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.lottery-title h2 {
+  color: white;
+}
+
+.lottery-button {
+  background: #AC1049;
+  color: white;
+}
+
+.lottery-disabled {
+  background: #D7D6D6;
+}
+
+@media (max-width: 767px){
+  .lottery {
+    width: 250px;
+    margin: 10px 10px;
+    border-radius: 6px;
+  }
+}

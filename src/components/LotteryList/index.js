@@ -5,11 +5,10 @@ import Lottery from '../Lottery';
 import {
   lotteryListRequest, toggleShowCompleted
 } from './lotterylist.actions';
-import { Switch } from '@blueprintjs/core';
-import './lotteryList.css'
+import { Switch, Button } from 'react-md';
+import './lotteryList.css';
 
 class LotteryList extends Component {
-
 
   componentWillMount() {
     this.startPoll();
@@ -36,38 +35,37 @@ class LotteryList extends Component {
       return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
     }) : [];
     return (
-      <div className="container-fluid">
-        <div className="row lt-v-">
-          <div className="row">
-            <div className="col-sm-10 col-xs-7">
-              <h3>Lotteries</h3>
-            </div>
-            <div className="col-sm-2 col-xs-5">
-              <Switch style={{ float: 'right', marginRight: 10, marginTop: 20 }} label='Show all' className="row text-right" checked={this.props.showAll} onChange={(e) => {
+      <section>
+        <div className="md-grid">
+          {/* <h3>{this.props.showAll ? "Lotteries" : "Lotteries in Progress"}</h3> */}
+          <div className="md-cell md-cell--10 lottery-buttons">
+            <Button
+              raised
+              primary
+            > Raffle's in progress </Button>
+            <Button
+              raised
+              primary
+            > Completed </Button>
+          </div>
+          <div className="md-cell md-cell--2">
+            <Switch
+              id="lottery-switch"
+              type="switch"
+              label="Show all"
+              name="lottery-switch"
+              checked={this.props.showAll}
+              onChange={(e) => {
                 this.setState({ showAll: !this.props.showAll }, () => {
                   this.props.lotteryListRequest(this.props.showAll)
                   this.props.toggleShowCompleted(this.props.showAll)
                 })
-              }} />
-            </div>
+              }}
+            />
           </div>
         </div>
-        <div className="row">
-          <table className="rwd-table">
-            <tbody>
-              <tr className="border-below lt-v-pad-8">
-                <th>Name</th>
-                <th>Prize Amount</th>
-                <th>Tickets Sold</th>
-                <th>Tickets Left</th>
-                <th>Price/Ticket</th>
-                <th>Action</th>
-              </tr>
-              {lotteries}
-            </tbody>
-          </table>
-        </div>
-      </div>
+        {lotteries}
+      </section>
     );
   }
 }

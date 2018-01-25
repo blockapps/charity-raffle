@@ -16,8 +16,8 @@ class Dashboard extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-sm-12">
-              <div className="pt-card">
+            <div className="md-grid">
+              <div className="md-cell md-cell--12">
                 <LotteryList />
               </div>
             </div>
