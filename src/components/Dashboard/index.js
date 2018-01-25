@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import NewLottery from '../NewLottery/';
-import LotteryList from '../LotteryList/';
+import HowToPlay from '../HowToPlay';
+import LotteryList from '../LotteryList';
 
 
 class Dashboard extends Component {
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12 text-right lt-v-pad-8">
-            <NewLottery />
+      <section>
+        <div className="container">
+          <div className="md-grid">
+            <div className="md-cell md-cell--12">
+              <HowToPlay />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-12">
-            <div className="pt-card">
-              <LotteryList />
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="pt-card">
+                <LotteryList />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

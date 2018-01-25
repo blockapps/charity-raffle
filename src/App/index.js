@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
-import './App.css';
+import './app.css';
 import {routes as scenes} from '../routes';
-import 'normalize.css/normalize.css';
-import '@blueprintjs/core/dist/blueprint.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import { FontIcon, Button, NavigationDrawer } from 'react-md';
+import NewLottery from '../components/NewLottery';
+// import 'normalize.css/normalize.css';
+// import '@blueprintjs/core/dist/blueprint.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 
 import { appInitCompileContract } from './app.actions';
 
@@ -18,14 +20,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="pt-navbar" >
-          <div className="pt-navbar-group pt-align-left">
-            <div className="pt-navbar-heading">Demo Lottery App</div>
-          </div>
-        </nav>
-        <main>
+        <NavigationDrawer
+          toolbarTitle="EZ RAFFLE"
+          className="raffel-navigation"
+          mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
+          tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT}
+          desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT}
+          toolbarActions={
+            <div>
+              <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>
+              <NewLottery />
+            </div>
+          }
+          contentId="main-demo-content"
+        >
           {scenes}
-        </main>
+        </NavigationDrawer>
       </div>
     );
   }

@@ -1,0 +1,18 @@
+@import '../../node_modules/react-md/src/scss/react-md';
+@import '../../node_modules/react-md/dist/react-md.indigo-pink.min.css';
+
+$md-primary-color: $md-blue-grey-900;
+$md-secondary-color: $md-blue-a-700;
+
+.raffel-navigation .md-paper .md-cell--right .md-btn--toolbar {
+  width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+body {
+  background: #37474f !important;
+  margin: 0;
+}
+
+@include react-md-everything;

@@ -52,10 +52,9 @@ class NewLottery extends Component {
     return (
       <div>
         <Button
-          className="pt-small pt-intent-primary pt-intent-success"
           onClick={this.handleOpenModal}
         >
-          Create new lottery
+          Create New Raffle
         </Button>
         <form>
           <Dialog
