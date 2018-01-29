@@ -11,6 +11,7 @@ const contractSrc = `contract Raffle {
   uint public ticketCount;
   uint public ticketPrice;
   string public name;
+  string public description:
 
   uint public winner;
   address public winnerAddress;
@@ -18,13 +19,14 @@ const contractSrc = `contract Raffle {
   uint public charityPercentage;
   address public initiator;
 
-  function Raffle(string _name, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
+  function Raffle(string _name, string _description, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
     // if ticket count < 2 - whats the point
     if (_ticketCount < 2) {
       throw;
     }
     // all good
     name = _name;
+    description = _description;
     ticketCount = _ticketCount;
     ticketPrice = _ticketPrice;
     charityPercentage = _charityPercentage;

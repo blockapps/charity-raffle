@@ -29,6 +29,7 @@ class NewLottery extends Component {
       password: values.modalPassword,
       args: {
         _name: values.modalName,
+        _description: values.modalRafalInfo,
         _ticketCount: values.modalValue,
         _ticketPrice: values.modalTicketPrice,
         _charityPercentage: values.modalCharity
