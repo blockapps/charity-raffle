@@ -20,9 +20,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Toolbar 
+        <Toolbar
           colored
-          title="DApps"
+          title="ETH LOTTERY"
           actions={
             <div>
               <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dialog } from '@blueprintjs/core';
+import { DialogContainer } from 'react-md';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
@@ -12,14 +12,10 @@ import './participate.css'
 class Participate extends Component {
 
   handleOpenModal = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
     this.props.participateOpenModal(this.props.lookup);
   }
 
   handleCloseModal = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
     this.props.reset();
     this.props.participateCloseModal(this.props.lookup);
   }
@@ -30,7 +26,7 @@ class Participate extends Component {
       userAddress: values.modalAddress,
       password: values.modalPassword,
       contractName: "Lottery",
-      contractAddress: this.props.contractAddress,
+      contractAddress: this.props.lotteryData.address,
       methodName: "enter",
       value: values.modalValue * this.props.lotteryData.ticketPrice * 1000000000000000000, //convert to ether
       args: {
@@ -42,126 +38,133 @@ class Participate extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
-    const error = this.props.failure  &&
-                (<div className="row">
-                  <div className="col-sm-12">
-                    <label className="pt-label" style={{marginTop: '5px', color:'red'}}>
-                      Failed to participate in lottery with error: {this.props.failure}
-                    </label>
-                  </div>
-                </div>)
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const error = this.props.failure &&
+      (<div className="row">
+        <div className="col-sm-12">
+          <label className="pt-label" style={{ marginTop: '5px', color: 'red' }}>
+            Failed to participate in lottery with error: {this.props.failure}
+          </label>
+        </div>
+      </div>)
+
+    const actions = [{
+      onClick: () => this.props.handleModal(false),
+      primary: true,
+      children: 'Close',
+    },
+    {
+      onClick: handleSubmit(this.submit),
+      disabled: this.props.pristine || this.props.submitting,
+      primary: true,
+      children: 'Play',
+    }];
 
     return (
-      <div className="participate">
-        <Button
-          className="pt-minimal pt-small pt-intent-primary participate-button"
-          onClick={this.handleOpenModal}
-        >
-          Participate
-        </Button>
+      <section className="participate">
         <form>
-          <Dialog
-            iconName="exchange"
-            isOpen={this.props.modal.isOpen}
-            onClose={this.handleCloseModal}
-            title={"Enter " + this.props.contractName}
-            className="custom-dialog"
+          <DialogContainer
+            id="participate-raffle"
+            className="new-participate"
+            visible={this.props.isOpen}
+            actions={actions}
+            onHide={this.handleCloseModal}
+            width={'40pc'}
+            title={`${this.props.lotteryData.name} Raffel`}
           >
-            <div className="pt-dialog-body">
-              {error}
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '5px'}}>
+            <div className="lottery-participate">
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Username
                   </label>
                 </div>
-                <div className="col-sm-9">
-                    <Field
-                      className="pt-input"
-                      name="modalUsername"
-                      component="input"
-                      placeholder="Username"
-                      type="text"
-                      required
-                    />
-                </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  name="modalUsername"
+                  component="input"
+                  placeholder="Username"
+                  type="text"
+                  disabled={user}
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Address
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                    <Field
-                      className="pt-input"
-                      component="input"
-                      placeholder="Address"
-                      type="text"
-                      name="modalAddress"
-                      required
-                    />
-                </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  component="input"
+                  placeholder="Address"
+                  type="text"
+                  name="modalAddress"
+                  disabled={user}
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Password
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                  <Field
-                    name="modalPassword"
-                    className="pt-input"
-                    placeholder="Password"
-                    component="input"
-                    type="password"
-                    required
-                  />
-                </div>
+                <Field
+                  name="modalPassword"
+                  className="md-cell md-cell--9"
+                  placeholder="Password"
+                  component="input"
+                  type="password"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Number of Tickets
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                  <Field
-                    name="modalValue"
-                    className="pt-input"
-                    component="input"
-                    placeholder="Number"
-                    type="number"
-                    required
-                  />
+                <Field
+                  name="modalValue"
+                  className="md-cell md-cell--9"
+                  component="input"
+                  placeholder="Number"
+                  type="number"
+                  required
+                />
+              </div>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
+                    Total
+                  </label>
                 </div>
+                <Field
+                  name="modalTotal"
+                  className="md-cell md-cell--4"
+                  component="input"
+                  placeholder="Number"
+                  type="number"
+                  required
+                />
               </div>
+              {error}
             </div>
-            <div className="pt-dialog-footer">
-              <div className="pt-dialog-footer-actions">
-                <Button text="Cancel" onClick={this.handleCloseModal} />
-                <button
-                  disabled={this.props.pristine || this.props.submitting}
-                  className="pt-button pt-intent-primary"
-                  type="button"
-                  onClick={handleSubmit(this.submit)}
-                >
-                  Enter Lottery
-                </button>
-              </div>
-            </div>
-          </Dialog>
+          </DialogContainer>
         </form>
-      </div>
+      </section>
     );
   }
 }
 
 const selector = formValueSelector('participate');
 
-function mapStateToProps(state,ownProps) {
+function mapStateToProps(state, ownProps) {
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
   return {
+    initialValues: { modalUsername: user && user.username, modalAddress: user && user.address },
     modal: state.participate.modals
       && state.participate.modals[ownProps.lookup] ?
       state.participate.modals[ownProps.lookup] : {},
