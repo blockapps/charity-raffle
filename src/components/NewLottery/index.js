@@ -31,8 +31,7 @@ class NewLottery extends Component {
         _name: values.modalName,
         _ticketCount: values.modalValue,
         _ticketPrice: values.modalTicketPrice,
-        _charity: values.modalCharity,
-        _rafalInfo: values.modalRafalInfo
+        _charityPercentage: values.modalCharity
       }
     }
     this.props.newLotteryCall(payload);
