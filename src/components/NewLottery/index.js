@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dialog } from '@blueprintjs/core';
+import { Button, DialogContainer } from 'react-md';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -8,18 +8,15 @@ import {
   newLotteryOpenModal,
   newLotteryCloseModal
 } from './newlottery.actions';
+import './newLottery.css';
 
 class NewLottery extends Component {
 
   handleOpenModal = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
     this.props.newLotteryOpenModal();
   }
 
   handleCloseModal = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
     this.props.reset();
     this.props.newLotteryCloseModal();
   }
@@ -33,7 +30,9 @@ class NewLottery extends Component {
       args: {
         _name: values.modalName,
         _ticketCount: values.modalValue,
-        _ticketPrice: values.modalTicketPrice
+        _ticketPrice: values.modalTicketPrice,
+        _charity: values.modalCharity,
+        _rafalInfo: values.modalRafalInfo
       }
     }
     this.props.newLotteryCall(payload);
@@ -41,168 +40,186 @@ class NewLottery extends Component {
 
   render() {
     const handleSubmit = this.props.handleSubmit;
-    const error = this.props.failure  && 
-                (<div className="row">
-                  <div className="col-sm-12">
-                    <label className="pt-label" style={{marginTop: '5px', color:'red'}}>
-                      Failed to create lottery with error: {this.props.failure}
-                    </label>
-                  </div>
-                </div>) 
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+    const actions = [{
+      onClick: this.handleCloseModal,
+      primary: true,
+      children: 'Close',
+    },
+    {
+      onClick: handleSubmit(this.submit),
+      primary: true,
+      children: 'Submit',
+    }];
+
+    const error = this.props.failure &&
+      (<div className="md-cell md-cell--12">
+        <label style={{ marginTop: '5px', color: 'red' }}>
+          Failed to create lottery with error: {JSON.stringify(this.props.failure)}
+        </label>
+      </div>)
+
     return (
-      <div>
-        <Button
-          onClick={this.handleOpenModal}
-        >
+      <section className="new-lottery-modal">
+        <Button raised primary onClick={this.handleOpenModal} className="open-modal">
           Create New Raffle
         </Button>
         <form>
-          <Dialog
-            iconName="exchange"
-            isOpen={this.props.isOpen}
-            onClose={this.handleCloseModal}
+          <DialogContainer
+            id="simple-new-raffle"
+            className="new-raffle"
+            visible={this.props.isOpen}
+            actions={actions}
+            onHide={this.handleCloseModal}
+            width={'40pc'}
             title={"Create new lottery"}
-            className="custom-dialog"
           >
-            <div className="pt-dialog-body">
-              {error}
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '5px'}}>
+            <div className="lottery-detail">
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Username
                   </label>
                 </div>
-                <div className="col-sm-9">
-                    <Field
-                      className="pt-input"
-                      name="modalUsername"
-                      placeholder="Username"
-                      component="input"
-                      type="text"
-                      required
-                    />
-                </div>
+                <Field
+                  name="modalUsername"
+                  placeholder="Username"
+                  component="input"
+                  type="text"
+                  className="md-cell md-cell--9"
+                  disabled={user}
+                  value="one"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Address
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                    <Field
-                      component="input"
-                      className="pt-input"
-                      placeholder="Address"
-                      type="text"
-                      name="modalAddress"
-                      required
-                    />
-                </div>
+                <Field
+                  component="input"
+                  className="md-cell md-cell--9"
+                  placeholder="Address"
+                  type="text"
+                  disabled={user}
+                  name="modalAddress"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Password
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                  <Field
-                    name="modalPassword"
-                    className="pt-input"
-                    placeholder="Password"
-                    component="input"
-                    type="password"
-                    required
-                  />
-                </div>
+                <Field
+                  name="modalPassword"
+                  className="md-cell md-cell--9"
+                  placeholder="Password"
+                  component="input"
+                  type="password"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
-                    Lottery Name
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
+                    Raffle Name
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                    <Field
-                      className="pt-input"
-                      component="input"
-                      type="text"
-                      placeholder="Lottery Name"
-                      name="modalName"
-                      required
-                    />
-                </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  component="input"
+                  type="text"
+                  placeholder="Lottery Name"
+                  name="modalName"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
+                    Raffle Info
+                  </label>
+                </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  component="input"
+                  type="text"
+                  placeholder="Lottery Name"
+                  name="modalRafalInfo"
+                  required
+                />
+              </div>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Number of Tickets
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                  <div className="pt-form-group">
-                    <div className="pt-form-content">
-                      <Field
-                        name="modalValue"
-                        className="pt-input"
-                        component="input"
-                        type="number"
-                        required
-                      />
-                      <div className="pt-form-helper-text">Must be > 1</div>  
-                    </div>
-                  </div>
-                </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  name="modalValue"
+                  component="input"
+                  type="number"
+                  required
+                />
               </div>
-              <div className="row">
-                <div className="col-sm-3">
-                  <label className="pt-label" style={{marginTop: '9px'}}>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
                     Ticket Price
                   </label>
                 </div>
-                <div className="col-sm-9 smd-pad-4">
-                  <Field
-                    name="modalTicketPrice"
-                    className="pt-input"
-                    component="input"
-                    placeholder="Price"
-                    type="number"
-                    required
-                  />
+                <Field
+                  className="md-cell md-cell--9"
+                  name="modalTicketPrice"
+                  component="input"
+                  placeholder="Price"
+                  type="number"
+                  required
+                />
+              </div>
+              <div className="md-grid">
+                <div className="md-cell md-cell--3">
+                  <label>
+                    Charity %
+                  </label>
                 </div>
+                <Field
+                  className="md-cell md-cell--9"
+                  name="modalCharity"
+                  component="input"
+                  placeholder="Price"
+                  type="number"
+                  required
+                />
               </div>
+              {error}
             </div>
-            <div className="pt-dialog-footer">
-              <div className="pt-dialog-footer-actions">
-                <Button text="Cancel" onClick={this.handleCloseModal} />
-                <button
-                  disabled={this.props.pristine || this.props.submitting || !this.props.valid}
-                  className="pt-button pt-intent-primary"
-                  type="button"
-                  onClick={handleSubmit(this.submit)}
-                >
-                Create
-                </button>
-              </div>
-            </div>
-          </Dialog>
+          </DialogContainer>
         </form>
-      </div>
+      </section>
     );
   }
 }
 
 
 function mapStateToProps(state) {
+  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
   return {
+    initialValues: { modalUsername: user && user.username, modalAddress: user && user.address },
     isOpen: state.newLottery.isOpen,
     failure: state.newLottery.failure,
     modalUsername: '',
   };
 }
 
-function validate (values) {
+function validate(values) {
   const errors = {};
   if (values.modalValue < 2) {
     errors.modalValue = "Must have more than 1 ticket in lottery";
@@ -211,7 +228,7 @@ function validate (values) {
 
 }
 
-const formed = reduxForm({ form: 'newLottery' , validate})(NewLottery);
+const formed = reduxForm({ form: 'newLottery', validate })(NewLottery);
 const connected = connect(
   mapStateToProps,
   {

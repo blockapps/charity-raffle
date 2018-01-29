@@ -1,103 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Button } from '@blueprintjs/core';
+import { DialogContainer, Button, FontIcon } from 'react-md';
 import './LotteryDetails.css';
 
 class LotteryDetails extends Component {
 
   render() {
+    const actions = [{
+      onClick: this.props.handleModal.bind(this, false),
+      primary: true,
+      children: 'Close',
+    },
+    {
+      onClick: this.props.handleModal.bind(this, false),
+      primary: true,
+      children: 'Play      0.1ETH',
+    }];
 
-    const filtered = this.props.lotteries.filter((l) => {
-      return l.address === this.props.address
-    });
-
-    if (filtered.length === 0) {
-      return (
-        <div className="row">
-          <div className="col-12 text-center">
-            <h4>Unable to find lottery with address {this.props.address}</h4>
-          </div>
-        </div>
-      )
-    }
-
-    const lottery = filtered[0];
-
-    const progressPercent = lottery.entries.length * 100 / lottery.ticketCount;
-    const hasWinner = (lottery.ticketCount - lottery.entries.length) === 0;
-    return (<div className="container">
-      <div className="row">
-        <div className="col-sm-12 text-right lt-v-pad-8">
-          <Button className="pt-minimal pt-small pt-intent-primary" onClick={() => this.props.history.goBack()}>
-            Back
+    return (<DialogContainer
+      id="lottery-detail-dialog"
+      className="ht-play"
+      visible={this.props.isOpen}
+      actions={actions}
+      onHide={this.props.handleModal.bind(this, false)}
+      width={'40pc'}
+      title={this.props.lotteryData.name}
+    >
+      <div className="lottery-detail">
+        <p>
+          <Button raised primary>
+            Overview
           </Button>
-        </div>
+        </p>
+        <p>
+          (lottery description) welcome to {this.props.lotteryData.name} lottery. the daily lottery brought to you buy the {this.props.lotteryData.name} masters.
+        </p>
+        <p> Jackpot: 10 coins </p>
+        <p> Ticket remaining: {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
+        <p> price: {this.props.lotteryData.ticketPrice} </p>
+        <p>
+          Invite your friends:
+          <FontIcon iconClassName="fa fa-whatsapp" />
+          <FontIcon iconClassName="fa fa-facebook-official" />
+          <FontIcon iconClassName="fa fa-twitter" />
+        </p>
       </div>
-      <div className="row">
-        <div className="col-sm-12">
-          <div className="pt-card">
-            <div className="row">
-              <div className="col-sm-4">
-                <h3>{lottery && lottery.name}</h3>
-              </div>
-            </div>
-            <div className="row ld-pad-8 align-progress-bar">
-              <div className="col-sm-4 col-xs-5">
-                <strong>Progress:</strong>
-              </div>
-              <div className="col-sm-8 col-xs-7">
-                <div className="pt-progress-bar pt-intent-success modifier pt-no-stripes">
-                  <div className="pt-progress-meter" style={{ width: `${progressPercent}%` }}></div>
-                </div>
-              </div>
-            </div>
-            <div className="row ld-pad-8">
-              <div className="col-sm-4 col-xs-5">
-                <strong>Tickets Count:</strong>
-              </div>
-              <div className="col-sm-8 col-xs-7">
-                <span>{lottery && lottery.ticketCount}</span>
-              </div>
-            </div>
-            <div className="row ld-pad-8">
-              <div className="col-sm-4 col-xs-5">
-                <strong>Price/Ticket:</strong>
-              </div>
-              <div className="col-sm-8 col-xs-7">
-                <span>{lottery && lottery.ticketPrice}</span>
-              </div>
-            </div>
-            {
-              hasWinner && <div className="row ld-pad-8">
-                <div className="col-sm-4 col-xs-5">
-                  <strong>Winner Address:</strong>
-                </div>
-                <div className="col-sm-8 col-xs-7">
-                  <span>{lottery && lottery.winnerAddress}</span>
-                </div>
-              </div>
-            }
-            <div className="row ld-pad-8">
-              <div className="col-sm-4 col-xs-5">
-                <strong>Tickets Sold:</strong>
-              </div>
-              <div className="col-sm-8 col-xs-7">
-                <span>{lottery && lottery.entries.length}</span>
-              </div>
-            </div>
-            <div className="row ld-pad-8">
-              <div className="col-sm-4 col-xs-5">
-                <strong>Tickets Left:</strong>
-              </div>
-              <div className="col-sm-8 col-xs-7">
-                <span>{lottery && (lottery.ticketCount - lottery.entries.length)}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>);
+    </DialogContainer>);
   }
 }
 

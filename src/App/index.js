@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
 import { routes as scenes } from '../routes';
-import { FontIcon, Button, NavigationDrawer } from 'react-md';
+import { FontIcon, Button, Toolbar } from 'react-md';
 import NewLottery from '../components/NewLottery';
 // import 'normalize.css/normalize.css';
 // import '@blueprintjs/core/dist/blueprint.css';
@@ -20,22 +20,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavigationDrawer
-          toolbarTitle="EZ RAFFLE"
-          className="raffel-navigation"
-          mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
-          tabletDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT}
-          desktopDrawerType={NavigationDrawer.DrawerTypes.PERSISTENT}
-          toolbarActions={
+        <Toolbar 
+          colored
+          title="DApps"
+          actions={
             <div>
               <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>
               <NewLottery />
             </div>
           }
-          contentId="main-demo-content"
-        >
-          {scenes}
-        </NavigationDrawer>
+        />
+        {scenes}
       </div>
     );
   }

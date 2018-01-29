@@ -31,13 +31,14 @@ class LotteryList extends Component {
   }
 
   render() {
+
     const lotteries = Array.isArray(this.props.lotteries) ? this.props.lotteries.map((item, i) => {
       return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
     }) : [];
+
     return (
       <section>
         <div className="md-grid">
-          {/* <h3>{this.props.showAll ? "Lotteries" : "Lotteries in Progress"}</h3> */}
           <div className="md-cell md-cell--10 lottery-buttons">
             <Button
               raised
@@ -84,4 +85,5 @@ const connected = connect(
     toggleShowCompleted
   }
 )(LotteryList);
+
 export default withRouter(connected);

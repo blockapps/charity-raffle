@@ -24,7 +24,7 @@ function* makeNewLotteryRequest(action) {
     yield put(newLotterySuccess(response));
   }
   catch(err) {
-    yield put(newLotteryFailure(err));
+    yield put(newLotteryFailure(err.message));
   }
 }
 

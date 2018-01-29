@@ -4,14 +4,18 @@
 $md-primary-color: $md-blue-grey-900;
 $md-secondary-color: $md-blue-a-700;
 
-.raffel-navigation .md-paper .md-cell--right .md-btn--toolbar {
+.md-cell--right.md-toolbar--action-right {
   width: 200px;
+}
+
+.md-btn--toolbar {
   display: flex;
   align-items: center;
 }
 
 body {
   background: #37474f !important;
+  height: 100vh;
   margin: 0;
 }
 
