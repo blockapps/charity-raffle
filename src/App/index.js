@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './app.css';
 import { routes as scenes } from '../routes';
-import { FontIcon, Button, Toolbar } from 'react-md';
+import { Toolbar } from 'react-md';
 import { appInitCompileContract } from './app.actions';
 
 class App extends Component {
@@ -18,11 +18,6 @@ class App extends Component {
         <Toolbar
           colored
           title="CHARITY RAFFLE"
-          actions={
-            <div>
-              <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>
-            </div>
-          }
         />
         {scenes}
       </div>

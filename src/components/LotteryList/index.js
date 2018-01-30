@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Lottery from '../Lottery';
 import {
-  lotteryListRequest, toggleShowCompleted, raffleInProgess, showCompletedRaffles
+  lotteryListRequest, toggleCompletedRaffles, toggleInProgressRaffles
 } from './lotterylist.actions';
-import { Switch, Button } from 'react-md';
+import { Button } from 'react-md';
 import './lotteryList.css';
 
 class LotteryList extends Component {
@@ -26,15 +26,23 @@ class LotteryList extends Component {
   startPoll() {
     var self = this
     this.timeout = setInterval(function () {
-      self.props.lotteryListRequest(self.props.showAll, self.props.isDisplayCompletedRaffle)
+      self.props.lotteryListRequest()
     }, 5 * 1000);
   }
 
   render() {
 
-    const lotteries = Array.isArray(this.props.lotteries) ? this.props.lotteries.map((item, i) => {
-      return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
-    }) : [];
+    const lotteries = Array.isArray(this.props.lotteries) 
+      ? this.props.lotteries
+          .filter((item) => {
+            const remaining = item.ticketCount - item.entries.length;
+            return (this.props.displayCompleted && remaining <= 0)
+              || (this.props.displayInProgress && remaining > 0)
+          })
+          .map((item, i) => {
+            return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
+          }) 
+      : [];
 
     return (
       <section>
@@ -43,34 +51,19 @@ class LotteryList extends Component {
             <Button
               raised
               primary
+              className = {this.props.displayInProgress ? 'lbutton-highlighted' : ''}
               onClick={(e) => {
-                this.props.lotteryListRequest(false, this.props.isDisplayCompletedRaffle);
-                this.props.raffleInProgess();
+                this.props.toggleInProgressRaffles();
               }}
             > Raffle's in progress </Button>
             <Button
               raised
               primary
+              className = {this.props.displayCompleted ? 'lbutton-highlighted' : ''}              
               onClick={(e) => {
-                this.props.lotteryListRequest(false, this.props.isDisplayCompletedRaffle);
-                this.props.showCompletedRaffles();
+                this.props.toggleCompletedRaffles();
               }}
             > Completed </Button>
-          </div>
-          <div className="md-cell md-cell--4 md-cell--6-phone button-slide">
-            <Switch
-              id="lottery-switch"
-              type="switch"
-              label="Show all"
-              name="lottery-switch"
-              checked={this.props.showAll}
-              onChange={(e) => {
-                this.setState({ showAll: !this.props.showAll }, () => {
-                  this.props.lotteryListRequest(this.props.showAll, this.props.isDisplayCompletedRaffle);
-                  this.props.toggleShowCompleted();
-                })
-              }}
-            />
           </div>
         </div>
         {lotteries}
@@ -82,8 +75,8 @@ class LotteryList extends Component {
 function mapStateToProps(state) {
   return {
     lotteries: state.lotteryList.lotteries,
-    showAll: state.lotteryList.showAll,
-    isDisplayCompletedRaffle: state.lotteryList.isDisplayCompletedRaffle
+    displayCompleted: state.lotteryList.displayCompleted,
+    displayInProgress: state.lotteryList.displayInProgress
   };
 }
 
@@ -91,9 +84,8 @@ const connected = connect(
   mapStateToProps,
   {
     lotteryListRequest,
-    toggleShowCompleted,
-    raffleInProgess,
-    showCompletedRaffles
+    toggleCompletedRaffles,
+    toggleInProgressRaffles
   }
 )(LotteryList);
 

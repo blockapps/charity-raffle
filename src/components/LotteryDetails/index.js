@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { DialogContainer, Button, FontIcon } from 'react-md';
+import { DialogContainer} from 'react-md';
 import './LotteryDetails.css';
 
 class LotteryDetails extends Component {
@@ -29,22 +29,11 @@ class LotteryDetails extends Component {
     >
       <div className="lottery-detail">
         <p>
-          <Button raised primary>
-            Overview
-          </Button>
-        </p>
-        <p>
           {this.props.lotteryData.description}
         </p>
         <p> Jackpot: {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount} coins </p>
-        <p> Ticket remaining: {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
-        <p> price: {this.props.lotteryData.ticketPrice} </p>
-        <p>
-          Invite your friends:
-          <FontIcon iconClassName="fa fa-whatsapp" />
-          <FontIcon iconClassName="fa fa-facebook-official" />
-          <FontIcon iconClassName="fa fa-twitter" />
-        </p>
+        <p> Ticket remaining: {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
+        <p> Price: {this.props.lotteryData.ticketPrice} coins per ticket </p>
       </div>
     </DialogContainer>);
   }

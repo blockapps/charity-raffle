@@ -1,10 +1,11 @@
 const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
 const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
-const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
-const raffleListUrlNotEqual = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=not.eq.0000000000000000000000000000000000000000`;
+// const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
+// const raffleListUrlNotEqual = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=not.eq.0000000000000000000000000000000000000000`;
 const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/Raffle`;
 const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
 const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
+const codeHash = 'a44d5968d33c8d99ef36ea6980a4151fd1fd45379a85425d55a71ccfb1860e57';
 
 const contractName = "Raffle";
 const contractSrc = `contract Raffle {
@@ -105,7 +106,7 @@ export function uploadContract(payload) {
         });
     })
     .then((json) => {
-      isCompiled(json.data.contents.codeHash)
+      isCompiled()
         .then((compiled) => {
           if (compiled) {
             return;
@@ -157,7 +158,7 @@ export function setContract(admin, contract) {
   console.log('setContract');
 }
 
-export function isCompiled(codeHash) {
+export function isCompiled() {
   return fetch(
     `${cirrusUrl}/contract?codeHash=eq.${codeHash}`, {
       method: 'GET'
@@ -253,11 +254,11 @@ export function getRaffle(address) {
   // return results[0];
 }
 
-export function getOpen(isShowAll, isDisplayCompletedRaffle) {
-  const URL = isDisplayCompletedRaffle ? raffleListUrlNotEqual : (isShowAll ? raffleListUrlAll : raffleListUrl);
+export function getOpen() {
+  const URL = raffleListUrlAll;
   return fetch(
     URL, {
-      method: 'GET',
+      method: 'GET'
     })
     .then(function (response) {
       return response.json();

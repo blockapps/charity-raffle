@@ -1,7 +1,10 @@
 .lottery-buttons button {
-  background: #AC1049;
   color: white;
   margin-right: 8px;
+}
+
+.lbutton-highlighted {
+  background: #AC1049;  
 }
 
 label.md-selection-control-label.md-pointer--hover.md-text {

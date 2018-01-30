@@ -1,11 +1,13 @@
 import {
-  LOTTERY_LIST_SUCCESS, TOGGLE_SHOW_COMPLETED, RAFFLE_IN_PROGRESS, SHOW_COMPLETED_RAFFELS
+  LOTTERY_LIST_SUCCESS, 
+  TOGGLE_COMPLETED_RAFFELS,
+  TOGGLE_INPROGRESS_RAFFELS 
 } from './lotterylist.actions';
 
 const initialState = {
   lotteries: [],
-  showAll: false,
-  isDisplayCompletedRaffle: false
+  displayCompleted: true,
+  displayInProgress: true,
 };
 
 
@@ -16,22 +18,15 @@ const reducer = function (state = initialState, action) {
         ...state,
         lotteries: action.lotteries,
       }
-    case TOGGLE_SHOW_COMPLETED:
+    case TOGGLE_COMPLETED_RAFFELS:
       return {
         ...state,
-        isDisplayCompletedRaffle: false,
-        showAll: !state.showAll,
+        displayCompleted: !state.displayCompleted
       }
-    case RAFFLE_IN_PROGRESS:
+    case TOGGLE_INPROGRESS_RAFFELS:
       return {
         ...state,
-        isDisplayCompletedRaffle: false,
-        showAll: false,
-      }
-    case SHOW_COMPLETED_RAFFELS:
-      return {
-        ...state,
-        isDisplayCompletedRaffle: true,
+        displayInProgress: !state.displayInProgress
       }
     default:
       return state;

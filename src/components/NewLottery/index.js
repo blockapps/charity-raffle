@@ -138,7 +138,7 @@ class NewLottery extends Component {
                   className="md-cell md-cell--9"
                   component={ReduxedTextField}
                   type="text"
-                  placeholder="Lottery Name"
+                  placeholder="Raffle Name"
                   name="modalName"
                   id="modalName"
                   required
@@ -154,7 +154,7 @@ class NewLottery extends Component {
                   className="md-cell md-cell--9"
                   component={ReduxedTextField}
                   type="text"
-                  placeholder="Lottery Name"
+                  placeholder="Raffle Description"
                   name="modalRafalInfo"
                   id="modalRafalInfo"
                   required
@@ -202,7 +202,7 @@ class NewLottery extends Component {
                   name="modalCharity"
                   id="modalCharity"
                   component={ReduxedTextField}
-                  placeholder="Price"
+                  placeholder="Percentage"
                   type="number"
                   required
                 />

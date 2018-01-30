@@ -179,8 +179,8 @@ function validate(values) {
   if (!values.modalValue) {
     errors.modalValue = "Tickets Required";
   }
-  if (values.modalValue < 2) {
-    errors.modalValue = "Must have more than 1 ticket in lottery";
+  if (values.modalValue < 1) {
+    errors.modalValue = "Must have at least 1 ticket in lottery";
   }
   if (!values.modalTotal) {
     errors.modalTotal = "Total Required";
