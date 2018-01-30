@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Lottery from '../Lottery';
 import {
-  lotteryListRequest, toggleShowCompleted, raffleInProgess
+  lotteryListRequest, toggleShowCompleted, raffleInProgess, showCompletedRaffles
 } from './lotterylist.actions';
 import { Switch, Button } from 'react-md';
 import './lotteryList.css';
@@ -26,8 +26,8 @@ class LotteryList extends Component {
   startPoll() {
     var self = this
     this.timeout = setInterval(function () {
-      self.props.lotteryListRequest(self.props.showAll)
-    }, 1000);
+      self.props.lotteryListRequest(self.props.showAll, self.props.isDisplayCompletedRaffle)
+    }, 5 * 1000);
   }
 
   render() {
@@ -44,13 +44,17 @@ class LotteryList extends Component {
               raised
               primary
               onClick={(e) => {
-                this.props.lotteryListRequest(false);
+                this.props.lotteryListRequest(false, this.props.isDisplayCompletedRaffle);
                 this.props.raffleInProgess();
               }}
             > Raffle's in progress </Button>
             <Button
               raised
               primary
+              onClick={(e) => {
+                this.props.lotteryListRequest(false, this.props.isDisplayCompletedRaffle);
+                this.props.showCompletedRaffles();
+              }}
             > Completed </Button>
           </div>
           <div className="md-cell md-cell--2">
@@ -62,7 +66,7 @@ class LotteryList extends Component {
               checked={this.props.showAll}
               onChange={(e) => {
                 this.setState({ showAll: !this.props.showAll }, () => {
-                  this.props.lotteryListRequest(this.props.showAll);
+                  this.props.lotteryListRequest(this.props.showAll, this.props.isDisplayCompletedRaffle);
                   this.props.toggleShowCompleted();
                 })
               }}
@@ -78,7 +82,8 @@ class LotteryList extends Component {
 function mapStateToProps(state) {
   return {
     lotteries: state.lotteryList.lotteries,
-    showAll: state.lotteryList.showAll
+    showAll: state.lotteryList.showAll,
+    isDisplayCompletedRaffle: state.lotteryList.isDisplayCompletedRaffle
   };
 }
 
@@ -87,7 +92,8 @@ const connected = connect(
   {
     lotteryListRequest,
     toggleShowCompleted,
-    raffleInProgess
+    raffleInProgess,
+    showCompletedRaffles
   }
 )(LotteryList);
 

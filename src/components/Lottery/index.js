@@ -43,7 +43,6 @@ class Lottery extends Component {
           </CardText>
         </Card>
         <LotteryDetails isOpen={this.state.isOpen} handleModal={this.handleModal.bind(this)} lotteryData={this.props.lotteryData} />
-        
       </div>
     );
   }

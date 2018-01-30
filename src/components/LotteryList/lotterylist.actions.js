@@ -3,11 +3,13 @@ export const LOTTERY_LIST_SUCCESS = 'LOTTERY_LIST_SUCCESS';
 export const LOTTERY_LIST_FAILURE = 'LOTTERY_LIST_FAILURE';
 export const TOGGLE_SHOW_COMPLETED = "TOGGLE_SHOW_COMPLETED";
 export const RAFFLE_IN_PROGRESS = 'RAFFLE_IN_PROGRESS';
+export const SHOW_COMPLETED_RAFFELS = 'SHOW_COMPLETED_RAFFELS';
 
-export const lotteryListRequest = function(value) {
+export const lotteryListRequest = function(value, isDisplayCompletedRaffle) {
   return {
     type: LOTTERY_LIST_REQUEST,
-    isShowAll: value
+    isShowAll: value,
+    isDisplayCompletedRaffle
   };
 }
 
@@ -34,5 +36,12 @@ export const toggleShowCompleted = function() {
 export const raffleInProgess = function() {
   return {
     type: RAFFLE_IN_PROGRESS,
+  }
+}
+
+export const showCompletedRaffles = function(isDisplayCompletedRaffle) {
+  return {
+    type: SHOW_COMPLETED_RAFFELS,
+    isDisplayCompletedRaffle
   }
 }

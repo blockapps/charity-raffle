@@ -1,6 +1,7 @@
 const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
 const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
 const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
+const raffleListUrlNotEqual = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=not.eq.0000000000000000000000000000000000000000`;
 const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/Raffle`;
 const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
 const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
@@ -253,8 +254,8 @@ export function getRaffle(address) {
   // return results[0];
 }
 
-export function getOpen(isShowAll) {
-  const URL = isShowAll ? raffleListUrlAll : raffleListUrl
+export function getOpen(isShowAll, isDisplayCompletedRaffle) {
+  const URL = isDisplayCompletedRaffle ? raffleListUrlNotEqual : (isShowAll ? raffleListUrlAll : raffleListUrl);
   return fetch(
     URL, {
       method: 'GET',
