@@ -22,7 +22,7 @@ class App extends Component {
       <div className="App">
         <Toolbar
           colored
-          title="ETH LOTTERY"
+          title="ETH RAFFLE"
           actions={
             <div>
               <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>

@@ -34,7 +34,7 @@ class LotteryDetails extends Component {
           </Button>
         </p>
         <p>
-          (lottery description) welcome to {this.props.lotteryData.name} lottery. the daily lottery brought to you buy the {this.props.lotteryData.name} masters.
+          {this.props.lotteryData.description}
         </p>
         <p> Jackpot: 10 coins </p>
         <p> Ticket remaining: {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>

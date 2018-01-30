@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DialogContainer } from 'react-md';
+import { DialogContainer, Button } from 'react-md';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
@@ -25,7 +25,7 @@ class Participate extends Component {
       username: values.modalUsername,
       userAddress: values.modalAddress,
       password: values.modalPassword,
-      contractName: "Lottery",
+      contractName: "Raffle",
       contractAddress: this.props.lotteryData.address,
       methodName: "enter",
       value: values.modalValue * this.props.lotteryData.ticketPrice * 1000000000000000000, //convert to ether
@@ -49,7 +49,7 @@ class Participate extends Component {
       </div>)
 
     const actions = [{
-      onClick: () => this.props.handleModal(false),
+      onClick: this.handleCloseModal,
       primary: true,
       children: 'Close',
     },
@@ -62,11 +62,17 @@ class Participate extends Component {
 
     return (
       <section className="participate">
+        <Button
+          raised
+          primary
+          onClick={this.handleOpenModal}
+          disabled={this.props.isDisabled}
+          className={this.props.isDisabled ? 'lottery-disabled' : 'lottery-button'} > Play {this.props.lotteryData.ticketPrice} coin </Button>
         <form>
           <DialogContainer
             id="participate-raffle"
             className="new-participate"
-            visible={this.props.isOpen}
+            visible={this.props.modal.isOpen || false}
             actions={actions}
             onHide={this.handleCloseModal}
             width={'40pc'}

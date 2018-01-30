@@ -6,13 +6,13 @@ import {
   APP_INIT_COMPILE_CONTRACT
 } from './app.actions';
 
-import {compileSearch} from '../lottery/lottery';
+import { compileSearch } from '../raffle/raffle';
 
 function* compileLotteryContract(action) {
   try {
     yield call(compileSearch);
   }
-  catch(err) {
+  catch (err) {
     // dont do anything
   }
 }

@@ -36,19 +36,14 @@ class Lottery extends Component {
           <CardText>
             <p> <b>Jackpot:</b> 10 coins </p>
             <p> <b>Ticket remaining:</b> {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
-            <p> <b>Charity:</b> 30% </p>
+            <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
             <div className="md-text-center">
-              <Button
-                raised
-                primary
-                onClick={() => this.handleParticipateModal(true)}
-                disabled={isDisabled}
-                className={isDisabled ? 'lottery-disabled' : 'lottery-button'} > Play 0.012 coin </Button>
+              <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />
             </div>
           </CardText>
         </Card>
         <LotteryDetails isOpen={this.state.isOpen} handleModal={this.handleModal.bind(this)} lotteryData={this.props.lotteryData} />
-        <Participate isOpen={this.state.isParticipateOpen} handleModal={this.handleParticipateModal.bind(this)} lotteryData={this.props.lotteryData} />
+        
       </div>
     );
   }

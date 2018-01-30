@@ -147,8 +147,8 @@ class NewLottery extends Component {
                 </div>
                 <Field
                   className="md-cell md-cell--9"
-                  component="input"
-                  type="text"
+                  component="textarea"
+                  type="input"
                   placeholder="Lottery Name"
                   name="modalRafalInfo"
                   required

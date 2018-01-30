@@ -1,7 +1,7 @@
 const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
 const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
-const raffleListUrl = `http://${window.location.hostname}/cirrus/search/raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
-const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/raffle`;
+const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
+const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/Raffle`;
 const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
 const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
 
@@ -11,7 +11,7 @@ const contractSrc = `contract Raffle {
   uint public ticketCount;
   uint public ticketPrice;
   string public name;
-  string public description:
+  string public description;
 
   uint public winner;
   address public winnerAddress;
@@ -158,10 +158,10 @@ export function setContract(admin, contract) {
 
 export function isCompiled(codeHash) {
   return fetch(
-      `${cirrusUrl}/contract?codeHash=eq.${codeHash}`, {
-        method: 'GET'
-      }
-    )
+    `${cirrusUrl}/contract?codeHash=eq.${codeHash}`, {
+      method: 'GET'
+    }
+  )
     .then((response) => {
       return response.json();
     })
@@ -175,19 +175,19 @@ export function isCompiled(codeHash) {
 
 export function compileSearch() {
   return fetch(
-      compileUrl, {
-        method: 'POST',
-        headers: {
-          "accept": "application/json",
-          "content-type": "application/json"
-        },
-        body: JSON.stringify([{
-          "contractName": contractName,
-          "source": contractSrc,
-          "searchable": [contractName]
-        }])
-      }
-    )
+    compileUrl, {
+      method: 'POST',
+      headers: {
+        "accept": "application/json",
+        "content-type": "application/json"
+      },
+      body: JSON.stringify([{
+        "contractName": contractName,
+        "source": contractSrc,
+        "searchable": [contractName]
+      }])
+    }
+  )
     .then((response) => {
       return response.json();
     })
@@ -256,14 +256,14 @@ export function getRaffle(address) {
 export function getOpen(isShowAll) {
   const URL = isShowAll ? raffleListUrlAll : raffleListUrl
   return fetch(
-      URL, {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: {}
-      })
+    URL, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: {}
+    })
     .then(function (response) {
       return response.json();
     })

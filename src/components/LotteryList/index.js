@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Lottery from '../Lottery';
 import {
-  lotteryListRequest, toggleShowCompleted
+  lotteryListRequest, toggleShowCompleted, raffleInProgess
 } from './lotterylist.actions';
 import { Switch, Button } from 'react-md';
 import './lotteryList.css';
@@ -27,7 +27,7 @@ class LotteryList extends Component {
     var self = this
     this.timeout = setInterval(function () {
       self.props.lotteryListRequest(self.props.showAll)
-    }, 5 * 1000);
+    }, 1000);
   }
 
   render() {
@@ -43,6 +43,10 @@ class LotteryList extends Component {
             <Button
               raised
               primary
+              onClick={(e) => {
+                this.props.lotteryListRequest(false);
+                this.props.raffleInProgess();
+              }}
             > Raffle's in progress </Button>
             <Button
               raised
@@ -58,8 +62,8 @@ class LotteryList extends Component {
               checked={this.props.showAll}
               onChange={(e) => {
                 this.setState({ showAll: !this.props.showAll }, () => {
-                  this.props.lotteryListRequest(this.props.showAll)
-                  this.props.toggleShowCompleted(this.props.showAll)
+                  this.props.lotteryListRequest(this.props.showAll);
+                  this.props.toggleShowCompleted();
                 })
               }}
             />
@@ -82,7 +86,8 @@ const connected = connect(
   mapStateToProps,
   {
     lotteryListRequest,
-    toggleShowCompleted
+    toggleShowCompleted,
+    raffleInProgess
   }
 )(LotteryList);
 

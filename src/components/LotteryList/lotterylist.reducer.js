@@ -1,5 +1,5 @@
 import {
-    LOTTERY_LIST_SUCCESS, TOGGLE_SHOW_COMPLETED
+    LOTTERY_LIST_SUCCESS, TOGGLE_SHOW_COMPLETED, RAFFLE_IN_PROGRESS
   } from './lotterylist.actions';
 
   const initialState = {
@@ -19,6 +19,11 @@ import {
         return {
           ...state,
           showAll: !state.showAll,
+        }
+      case RAFFLE_IN_PROGRESS:
+        return {
+          ...state,
+          showAll: false,
         }
       default:
         return state;
