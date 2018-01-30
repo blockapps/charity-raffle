@@ -40,7 +40,6 @@ class Participate extends Component {
   }
 
   render() {
-    console.log("sadsd", this.props)
     const handleSubmit = this.props.handleSubmit;
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
     const error = this.props.failure &&
@@ -152,7 +151,7 @@ class Participate extends Component {
               <div className="md-grid">
                 <div className="md-cell md-cell--3 label-form">
                   <label>
-                    Total: {this.props.lotteryData.ticketPrice * this.props.form.modalValue}
+                    Total: {this.props.lotteryData.ticketPrice ? this.props.lotteryData.ticketPrice * this.props.modalValue : 0}
                   </label>
                 </div>
               </div>
@@ -200,6 +199,7 @@ function mapStateToProps(state, ownProps) {
       && state.participate.modals[ownProps.lookup] ?
       state.participate.modals[ownProps.lookup] : {},
     modalUsername: selector(state, 'modalUsername'),
+    modalValue: selector(state, 'modalValue'),
     failure: state.participate.failure,
   };
 }
