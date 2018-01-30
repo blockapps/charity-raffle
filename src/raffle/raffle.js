@@ -179,7 +179,6 @@ export function compileSearch() {
     compileUrl, {
       method: 'POST',
       headers: {
-        "accept": "application/json",
         "content-type": "application/json"
       },
       body: JSON.stringify([{
@@ -259,11 +258,6 @@ export function getOpen(isShowAll, isDisplayCompletedRaffle) {
   return fetch(
     URL, {
       method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: {}
     })
     .then(function (response) {
       return response.json();
