@@ -12,6 +12,7 @@ import {
 import './newLottery.css';
 
 class NewLottery extends Component {
+  submitting = false;
 
   handleOpenModal = (e) => {
     this.props.reset();
@@ -37,7 +38,7 @@ class NewLottery extends Component {
         _charityPercentage: values.modalCharity
       }
     }
-    this.props.newLotteryCall(payload);
+    this.submitting = this.props.newLotteryCall(payload).submitting;
   }
 
   render() {
@@ -51,8 +52,10 @@ class NewLottery extends Component {
     },
     {
       onClick: handleSubmit(this.submit),
+      disabled: this.submitting,
       primary: true,
       children: 'Submit',
+      className: this.submitting? 'disabled' : 'enabled',
     }];
 
     const error = this.props.failure &&

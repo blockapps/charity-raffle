@@ -6,6 +6,9 @@
 #simple-new-raffle-title, #simple-new-raffle button {
   background: #AC1049;
   color: white;
+  &.disabled {
+    background: #999;
+  }
 }
 
 #simple-new-raffle section {
