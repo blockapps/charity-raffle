@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
-import { Card, CardTitle, CardText, Button } from 'react-md';
+import { Card, CardTitle, CardText } from 'react-md';
 import LotteryDetails from '../LotteryDetails';
 import Participate from '../Participate';
 import { participateOpenModal } from '../Participate/participate.actions';
@@ -37,7 +37,7 @@ class Lottery extends Component {
             <p> <b>Jackpot:</b> 10 coins </p>
             <p> <b>Ticket remaining:</b> {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
             <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
-            <div className="md-text-center">
+            <div>
               <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />
             </div>
           </CardText>

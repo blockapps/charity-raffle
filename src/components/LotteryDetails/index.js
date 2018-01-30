@@ -15,7 +15,7 @@ class LotteryDetails extends Component {
     {
       onClick: this.props.handleModal.bind(this, false),
       primary: true,
-      children: 'Play      0.1ETH',
+      children: 'Play 0.1ETH',
     }];
 
     return (<DialogContainer

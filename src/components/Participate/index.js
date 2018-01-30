@@ -9,6 +9,8 @@ import {
   participateCloseModal
 } from './participate.actions';
 import './participate.css'
+import ReduxedTextField from '../../components/ReduxedTextField';
+
 class Participate extends Component {
 
   handleOpenModal = (e) => {
@@ -88,10 +90,11 @@ class Participate extends Component {
                 <Field
                   className="md-cell md-cell--9"
                   name="modalUsername"
-                  component="input"
+                  id="modalUsername"
+                  component={ReduxedTextField}
                   placeholder="Username"
                   type="text"
-                  disabled={user}
+                  disabled={Boolean(user)}
                   required
                 />
               </div>
@@ -103,11 +106,12 @@ class Participate extends Component {
                 </div>
                 <Field
                   className="md-cell md-cell--9"
-                  component="input"
+                  component={ReduxedTextField}
                   placeholder="Address"
                   type="text"
                   name="modalAddress"
-                  disabled={user}
+                  id="modalAddress"
+                  disabled={Boolean(user)}
                   required
                 />
               </div>
@@ -121,7 +125,8 @@ class Participate extends Component {
                   name="modalPassword"
                   className="md-cell md-cell--9"
                   placeholder="Password"
-                  component="input"
+                  id="modalPassword"
+                  component={ReduxedTextField}
                   type="password"
                   required
                 />
@@ -135,8 +140,9 @@ class Participate extends Component {
                 <Field
                   name="modalValue"
                   className="md-cell md-cell--9"
-                  component="input"
+                  component={ReduxedTextField}
                   placeholder="Number"
+                  id="modalValue"
                   type="number"
                   required
                 />
@@ -150,8 +156,9 @@ class Participate extends Component {
                 <Field
                   name="modalTotal"
                   className="md-cell md-cell--4"
-                  component="input"
+                  component={ReduxedTextField}
                   placeholder="Number"
+                  id="modalTotal"
                   type="number"
                   required
                 />
@@ -163,6 +170,31 @@ class Participate extends Component {
       </section>
     );
   }
+}
+
+function validate(values) {
+  const errors = {};
+
+  if (!values.modalUsername) {
+    errors.modalUsername = "Username Required";
+  }
+  if (!values.modalAddress) {
+    errors.modalAddress = "Address Required";
+  }
+  if (!values.modalPassword) {
+    errors.modalPassword = "Password Required";
+  }
+  if (!values.modalValue) {
+    errors.modalValue = "Tickets Required";
+  }
+  if (values.modalValue < 2) {
+    errors.modalValue = "Must have more than 1 ticket in lottery";
+  }
+  if (!values.modalTotal) {
+    errors.modalTotal = "Total Required";
+  }
+
+  return errors;
 }
 
 const selector = formValueSelector('participate');
@@ -180,7 +212,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-const formed = reduxForm({ form: 'participate' })(Participate);
+const formed = reduxForm({ form: 'participate', validate})(Participate);
 const connected = connect(
   mapStateToProps,
   {

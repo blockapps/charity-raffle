@@ -24,10 +24,10 @@ class HowToPlay extends Component {
 
     return (
       <section className="ht-play-section">
-        <div className="md-text-right">
+        <div className="md-text-right htp-button">
           <Button raised primary onClick={this.handleModal.bind(this, true)}>
             How To Play
-        </Button>
+          </Button>
         </div>
         <DialogContainer
           id="simple-action-dialog"

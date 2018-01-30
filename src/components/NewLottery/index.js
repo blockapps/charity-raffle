@@ -3,6 +3,7 @@ import { Button, DialogContainer } from 'react-md';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import ReduxedTextField from '../../components/ReduxedTextField';
 import {
   newLotteryCall,
   newLotteryOpenModal,
@@ -56,7 +57,7 @@ class NewLottery extends Component {
     const error = this.props.failure &&
       (<div className="md-cell md-cell--12">
         <label style={{ marginTop: '5px', color: 'red' }}>
-          Failed to create lottery with error: {JSON.stringify(this.props.failure)}
+          Failed to create raffle with error: {JSON.stringify(this.props.failure)}
         </label>
       </div>)
 
@@ -84,12 +85,12 @@ class NewLottery extends Component {
                 </div>
                 <Field
                   name="modalUsername"
+                  id="modalUsername"
                   placeholder="Username"
-                  component="input"
+                  component={ReduxedTextField}
                   type="text"
+                  disabled={Boolean(user)}
                   className="md-cell md-cell--9"
-                  disabled={user}
-                  value="one"
                   required
                 />
               </div>
@@ -100,12 +101,13 @@ class NewLottery extends Component {
                   </label>
                 </div>
                 <Field
-                  component="input"
+                  component={ReduxedTextField}
                   className="md-cell md-cell--9"
                   placeholder="Address"
                   type="text"
-                  disabled={user}
                   name="modalAddress"
+                  disabled={Boolean(user)}
+                  id="modalAddress"
                   required
                 />
               </div>
@@ -117,9 +119,10 @@ class NewLottery extends Component {
                 </div>
                 <Field
                   name="modalPassword"
+                  id="modalPassword"
                   className="md-cell md-cell--9"
                   placeholder="Password"
-                  component="input"
+                  component={ReduxedTextField}
                   type="password"
                   required
                 />
@@ -132,10 +135,11 @@ class NewLottery extends Component {
                 </div>
                 <Field
                   className="md-cell md-cell--9"
-                  component="input"
+                  component={ReduxedTextField}
                   type="text"
                   placeholder="Lottery Name"
                   name="modalName"
+                  id="modalName"
                   required
                 />
               </div>
@@ -147,10 +151,11 @@ class NewLottery extends Component {
                 </div>
                 <Field
                   className="md-cell md-cell--9"
-                  component="textarea"
-                  type="input"
+                  component={ReduxedTextField}
+                  type="text"
                   placeholder="Lottery Name"
                   name="modalRafalInfo"
+                  id="modalRafalInfo"
                   required
                 />
               </div>
@@ -163,7 +168,8 @@ class NewLottery extends Component {
                 <Field
                   className="md-cell md-cell--9"
                   name="modalValue"
-                  component="input"
+                  id="modalValue"
+                  component={ReduxedTextField}
                   type="number"
                   required
                 />
@@ -177,7 +183,8 @@ class NewLottery extends Component {
                 <Field
                   className="md-cell md-cell--9"
                   name="modalTicketPrice"
-                  component="input"
+                  id="modalTicketPrice"
+                  component={ReduxedTextField}
                   placeholder="Price"
                   type="number"
                   required
@@ -192,7 +199,8 @@ class NewLottery extends Component {
                 <Field
                   className="md-cell md-cell--9"
                   name="modalCharity"
-                  component="input"
+                  id="modalCharity"
+                  component={ReduxedTextField}
                   placeholder="Price"
                   type="number"
                   required
@@ -221,11 +229,48 @@ function mapStateToProps(state) {
 
 function validate(values) {
   const errors = {};
+
+  if (!values.modalUsername) {
+    errors.modalUsername = "Username Required";
+  }
+  if (!values.modalAddress) {
+    errors.modalAddress = "Address Required";
+  }
+  if (!values.modalPassword) {
+    errors.modalPassword = "Password Required";
+  }
+  if (!values.modalName) {
+    errors.modalName = "Name required";
+  }
+  if (!/^.{9,59}$/.test(values.modalName)) {
+    errors.modalName = " Raffle name must be at least 10 characters and less than 60 characters";
+  }
+  if (!values.modalRafalInfo) {
+    errors.modalRafalInfo = "Rafal info required";
+  }
+  if (!/^.{9,59}$/.test(values.modalRafalInfo)) {
+    errors.modalRafalInfo = " Raffle description must be at least 10 characters and less than 60 characters";
+  }
+  if (!values.modalTicketPrice) {
+    errors.modalTicketPrice = "Ticket price required";
+  }
+  if (!/^.{1,10}$/.test(values.modalTicketPrice)) {
+    errors.modalTicketPrice = "Ticket price must be at least 1 characters and less than 10 characters";
+  }
+  if (!values.modalCharity) {
+    errors.modalCharity = "Charity Required";
+  }
+  if (!(/^.{1,10}$/.test(values.modalCharity))) {
+    errors.modalCharity = "Less than 10 characters";
+  }
+  if (!values.modalValue) {
+    errors.modalValue = "Tickets Required";
+  }
   if (values.modalValue < 2) {
     errors.modalValue = "Must have more than 1 ticket in lottery";
   }
-  return errors;
 
+  return errors;
 }
 
 const formed = reduxForm({ form: 'newLottery', validate })(NewLottery);
