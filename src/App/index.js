@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <LoadingBar style={{display: 'block', position: 'fixed', top: '0px', backgroundColor: '#AC1049', zIndex: 999, height: '4px'}} />
+        <LoadingBar style={{display: 'block', position: 'fixed', top: '0px', backgroundColor: '#62d96b', zIndex: 999, height: '4px'}} />
         <Toolbar
           colored
           title="CHARITY RAFFLE"

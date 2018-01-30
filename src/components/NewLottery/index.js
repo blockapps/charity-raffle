@@ -15,6 +15,7 @@ class NewLottery extends Component {
   submitting = false;
 
   handleOpenModal = (e) => {
+    this.submitting = false;
     this.props.reset();
     this.props.newLotteryOpenModal();
   }

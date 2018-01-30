@@ -14,6 +14,7 @@ import ReduxedTextField from '../../components/ReduxedTextField';
 class Participate extends Component {
   submitting = false;
   handleOpenModal = (e) => {
+    this.submitting = false;
     this.props.reset();
     this.props.participateOpenModal(this.props.lookup);
   }
