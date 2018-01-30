@@ -1,7 +1,7 @@
 {
   "name": "charity-raffle",
   "description": "This apps demonstrates how to create a DApp using the STRATO platform",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "author": "BlockApps Inc",
   "homepage": ".",
   "private": true,
