@@ -9,7 +9,7 @@ import {
     participateFailure,
   } from './participate.actions';
 
-  import { enter } from '../../lottery/lottery';
+  import { enter } from '../../raffle/raffle';
 
 function* participateAPICall(payload) {
     return yield call(enter, payload);

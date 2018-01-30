@@ -9,7 +9,7 @@ import {
     lotteryListFailure,
   } from './lotterylist.actions';
 
-  import {getOpen} from '../../lottery/lottery'
+  import {getOpen} from '../../raffle/raffle'
 
   //const addressZero = '0000000000000000000000000000000000000000';
   //const results = yield rest.query(`${contractName}?winnerAddress=eq.${addressZero}`);
