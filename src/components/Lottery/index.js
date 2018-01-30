@@ -33,7 +33,7 @@ class Lottery extends Component {
       <div>
         <Card className="lottery">
           <CardTitle title={this.props.lotteryData.name} className="lottery-title" onClick={this.handleModal.bind(this, true)} />
-          <CardText>
+          <CardText className="card-text">
             <p> <b>Jackpot:</b> {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount} coins </p>
             <p> <b>Remaining Tickets:</b> {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
             <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>

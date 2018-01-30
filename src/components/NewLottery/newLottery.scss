@@ -11,3 +11,30 @@
 #simple-new-raffle section {
   color: black;
 }
+.md-text { 
+  margin:0px;
+}
+
+.md-text-field-container--input { 
+  margin: 0px;
+}
+
+.new-lottery-modal .md-password-btn { 
+  margin-top:-10px;
+  width: 30px;
+  margin-top: -13px;
+}
+
+@media (max-width: 992px) {
+  #simple-new-raffle { 
+    max-width:100%;
+    width: 600px !important;
+  }  
+}
+
+@media (max-width: 767px) {
+  #simple-new-raffle { 
+    max-width:100%;
+    width: 80% !important;
+  }  
+}

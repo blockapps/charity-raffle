@@ -39,7 +39,7 @@ class LotteryList extends Component {
     return (
       <section>
         <div className="md-grid">
-          <div className="md-cell md-cell--10 lottery-buttons">
+          <div className="md-cell md-cell--8 md-cell--4-phone lottery-buttons">
             <Button
               raised
               primary
@@ -57,7 +57,7 @@ class LotteryList extends Component {
               }}
             > Completed </Button>
           </div>
-          <div className="md-cell md-cell--2">
+          <div className="md-cell md-cell--4 md-cell--6-phone button-slide">
             <Switch
               id="lottery-switch"
               type="switch"

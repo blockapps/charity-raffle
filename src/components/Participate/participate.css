@@ -1,3 +1,31 @@
 #participate-raffle-title, #participate-raffle button {
   background: #AC1049;
   color: white; }
+
+#participate-raffle .md-password-btn {
+  margin-top: -10px;
+  width: 30px;
+  margin-top: -13px; 
+}
+
+.label-form {
+  margin: 0px; 
+}
+
+.md-text-field {
+  margin: 0px; 
+}
+
+@media (max-width: 992px) {
+  #simple-new-raffle {
+    max-width: 100%;
+    width: 600px !important; 
+  } 
+}
+
+@media (max-width: 767px) {
+  #participate-raffle {
+    max-width: 100%;
+    width: 80% !important; 
+  } 
+}

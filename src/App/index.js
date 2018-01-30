@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import './app.css';
 import { routes as scenes } from '../routes';
 import { FontIcon, Button, Toolbar } from 'react-md';
-import NewLottery from '../components/NewLottery';
-
 import { appInitCompileContract } from './app.actions';
 
 class App extends Component {
@@ -13,7 +11,7 @@ class App extends Component {
   componentWillMount() {
     this.props.appInitCompileContract();
   }
-
+  
   render() {
     return (
       <div className="App">
@@ -23,7 +21,6 @@ class App extends Component {
           actions={
             <div>
               <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>
-              <NewLottery />
             </div>
           }
         />

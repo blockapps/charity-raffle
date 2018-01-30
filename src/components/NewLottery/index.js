@@ -14,6 +14,7 @@ import './newLottery.css';
 class NewLottery extends Component {
 
   handleOpenModal = (e) => {
+    this.props.reset();
     this.props.newLotteryOpenModal();
   }
 
@@ -78,7 +79,7 @@ class NewLottery extends Component {
           >
             <div className="lottery-detail">
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Username
                   </label>
@@ -95,7 +96,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Address
                   </label>
@@ -112,7 +113,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Password
                   </label>
@@ -128,7 +129,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Raffle Name
                   </label>
@@ -144,7 +145,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Raffle Info
                   </label>
@@ -160,7 +161,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Number of Tickets
                   </label>
@@ -175,7 +176,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Ticket Price
                   </label>
@@ -191,7 +192,7 @@ class NewLottery extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Charity %
                   </label>

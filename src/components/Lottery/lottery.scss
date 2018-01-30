@@ -1,35 +1,70 @@
 .lottery {
-  width: 250px;
-  float: left; 
-  margin: 10px 20px;
+  width: 23.5%;
+  float: left;
+  margin: 10px 5px;
   border-radius: 6px;
+  box-shadow: 1px 2px 1px 4px #333;
+  
 }
 
 .lottery-title {
   display: block;
   background: #949393;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 0px;
   cursor: pointer;
+  padding:0px;
 }
 
 .lottery-title h2 {
   color: white;
+  font-size: 18px;
+  padding: 5px 0px;
 }
 
 .lottery-button {
   background: #AC1049;
   color: white;
+  margin:0px auto;
+  display: table;
 }
 
 .lottery-disabled {
   background: #D7D6D6;
 }
 
+.md-card-text.card-text:last-child{padding-bottom: 10px;}
+
+.card-text p{
+font-size: inherit;
+border-bottom: 1px solid #999;
+line-height: 30px;
+}
+
+.card-text b{font-weight: normal;}
+
+@media (max-width: 992px){
+  .lottery { 
+    width: 32%;
+    float: left;
+    margin: 10px 5px;
+  }
+}
 @media (max-width: 767px){
   .lottery {
-    width: 250px;
-    margin: 10px 10px;
+    width: 48%;
+    margin: 10px 5px;
     border-radius: 6px;
   }
+  .lottery-buttons button{
+    width: 100%;
+  }
+}
+@media (max-width: 550px){
+  .lottery {
+    width: 100%;
+    margin: 10px 5px;
+    border-radius: 6px;
+  }
+  
 }

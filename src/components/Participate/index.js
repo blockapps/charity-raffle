@@ -14,6 +14,7 @@ import ReduxedTextField from '../../components/ReduxedTextField';
 class Participate extends Component {
 
   handleOpenModal = (e) => {
+    this.props.reset();
     this.props.participateOpenModal(this.props.lookup);
   }
 
@@ -39,6 +40,7 @@ class Participate extends Component {
   }
 
   render() {
+    console.log("sadsd", this.props)
     const handleSubmit = this.props.handleSubmit;
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
     const error = this.props.failure &&
@@ -82,7 +84,7 @@ class Participate extends Component {
           >
             <div className="lottery-participate">
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Username
                   </label>
@@ -99,7 +101,7 @@ class Participate extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Address
                   </label>
@@ -116,7 +118,7 @@ class Participate extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Password
                   </label>
@@ -132,7 +134,7 @@ class Participate extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
                     Number of Tickets
                   </label>
@@ -148,9 +150,9 @@ class Participate extends Component {
                 />
               </div>
               <div className="md-grid">
-                <div className="md-cell md-cell--3">
+                <div className="md-cell md-cell--3 label-form">
                   <label>
-                    Total: {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount}
+                    Total: {this.props.lotteryData.ticketPrice * this.props.form.modalValue}
                   </label>
                 </div>
               </div>
@@ -203,7 +205,7 @@ function mapStateToProps(state, ownProps) {
 }
 
 
-const formed = reduxForm({ form: 'participate', validate})(Participate);
+const formed = reduxForm({ form: 'participate', validate })(Participate);
 const connected = connect(
   mapStateToProps,
   {

@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import HowToPlay from '../HowToPlay';
 import LotteryList from '../LotteryList';
-
+import NewLottery from '../NewLottery';
+import './dashboard.css'
 
 class Dashboard extends Component {
   render() {
@@ -13,6 +14,7 @@ class Dashboard extends Component {
           <div className="md-grid">
             <div className="md-cell md-cell--12">
               <HowToPlay />
+              <NewLottery />
             </div>
           </div>
           <div className="row">
