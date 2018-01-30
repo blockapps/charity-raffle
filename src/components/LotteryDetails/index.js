@@ -36,7 +36,7 @@ class LotteryDetails extends Component {
         <p>
           {this.props.lotteryData.description}
         </p>
-        <p> Jackpot: 10 coins </p>
+        <p> Jackpot: {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount} coins </p>
         <p> Ticket remaining: {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
         <p> price: {this.props.lotteryData.ticketPrice} </p>
         <p>

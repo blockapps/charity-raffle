@@ -34,8 +34,8 @@ class Lottery extends Component {
         <Card className="lottery">
           <CardTitle title={this.props.lotteryData.name} className="lottery-title" onClick={this.handleModal.bind(this, true)} />
           <CardText>
-            <p> <b>Jackpot:</b> 10 coins </p>
-            <p> <b>Ticket remaining:</b> {this.props.lotteryData.entries.length}/{this.props.lotteryData.ticketCount} </p>
+            <p> <b>Jackpot:</b> {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount} coins </p>
+            <p> <b>Remaining Tickets:</b> {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
             <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
             <div>
               <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />
@@ -49,9 +49,7 @@ class Lottery extends Component {
 }
 
 function mapStateToProps(state) {
-  return {
-
-  };
+  return {};
 }
 
 const connected = connect(

@@ -5,9 +5,6 @@ import './app.css';
 import { routes as scenes } from '../routes';
 import { FontIcon, Button, Toolbar } from 'react-md';
 import NewLottery from '../components/NewLottery';
-// import 'normalize.css/normalize.css';
-// import '@blueprintjs/core/dist/blueprint.css';
-// import 'bootstrap/dist/css/bootstrap.css';
 
 import { appInitCompileContract } from './app.actions';
 
@@ -22,7 +19,7 @@ class App extends Component {
       <div className="App">
         <Toolbar
           colored
-          title="ETH RAFFLE"
+          title="CHARITY RAFFLE"
           actions={
             <div>
               <Button icon ><FontIcon iconClassName="fa fa-user-circle" /></Button>

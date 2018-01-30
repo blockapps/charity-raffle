@@ -150,18 +150,9 @@ class Participate extends Component {
               <div className="md-grid">
                 <div className="md-cell md-cell--3">
                   <label>
-                    Total
+                    Total: {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount}
                   </label>
                 </div>
-                <Field
-                  name="modalTotal"
-                  className="md-cell md-cell--4"
-                  component={ReduxedTextField}
-                  placeholder="Number"
-                  id="modalTotal"
-                  type="number"
-                  required
-                />
               </div>
               {error}
             </div>
