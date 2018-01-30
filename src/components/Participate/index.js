@@ -151,7 +151,7 @@ class Participate extends Component {
               <div className="md-grid">
                 <div className="md-cell md-cell--3 label-form">
                   <label>
-                    Total: {this.props.lotteryData.ticketPrice ? this.props.lotteryData.ticketPrice * this.props.modalValue : 0}
+                    Total: {this.props.lotteryData.ticketPrice * this.props.modalValue || 0}
                   </label>
                 </div>
               </div>
