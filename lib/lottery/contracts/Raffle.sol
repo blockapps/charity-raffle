@@ -26,23 +26,25 @@ contract Raffle {
     initiator = msg.sender;
   }
 
-  function enter() payable returns (bool)  {
+  function enter(uint _numTickets) payable returns (bool) {
     // check if ticket price satisfied
-    if (msg.value < ticketPrice) {
+    if (msg.value < ticketPrice * _numTickets) {
       return false;
     }
     // check capacity
-    if (entries.length >= ticketCount) {
+    if (entries.length > ticketCount - _numTickets) {
       return false;
     }
     // enter the lottery
-    entries.push(msg.sender);
+    for(uint i=0; i<_numTickets; i++) {
+      entries.push(msg.sender);
+    }
     // payout
     if (entries.length >= ticketCount) {
       return payout();
     }
     return true;
-   }
+  }
 
   /* return a random index into entries */
   function rand(uint seed) internal returns (uint) {

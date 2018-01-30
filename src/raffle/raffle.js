@@ -12,7 +12,6 @@ const contractSrc = `contract Raffle {
   uint public ticketCount;
   uint public ticketPrice;
   string public name;
-  string public description;
 
   uint public winner;
   address public winnerAddress;
@@ -20,14 +19,13 @@ const contractSrc = `contract Raffle {
   uint public charityPercentage;
   address public initiator;
 
-  function Raffle(string _name, string _description, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
+  function Raffle(string _name, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
     // if ticket count < 2 - whats the point
     if (_ticketCount < 2) {
       throw;
     }
     // all good
     name = _name;
-    description = _description;
     ticketCount = _ticketCount;
     ticketPrice = _ticketPrice;
     charityPercentage = _charityPercentage;
@@ -35,23 +33,25 @@ const contractSrc = `contract Raffle {
     initiator = msg.sender;
   }
 
-  function enter() payable returns (bool)  {
+  function enter(uint _numTickets) payable returns (bool) {
     // check if ticket price satisfied
-    if (msg.value < ticketPrice) {
+    if (msg.value < ticketPrice * _numTickets) {
       return false;
     }
     // check capacity
-    if (entries.length >= ticketCount) {
+    if (entries.length > ticketCount - _numTickets) {
       return false;
     }
     // enter the lottery
-    entries.push(msg.sender);
+    for(uint i=0; i<_numTickets; i++) {
+      entries.push(msg.sender);
+    }
     // payout
     if (entries.length >= ticketCount) {
       return payout();
     }
     return true;
-   }
+  }
 
   /* return a random index into entries */
   function rand(uint seed) internal returns (uint) {
