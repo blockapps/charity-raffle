@@ -3,6 +3,10 @@
   "description": "This apps demonstrates how to create a DApp using the STRATO platform",
   "version": "0.1.10",
   "author": "BlockApps Inc",
+  "engines": {
+    "npm": "v5.6.0",
+    "node": "v8.9.4"
+  },
   "homepage": ".",
   "private": true,
   "dependencies": {

@@ -25,7 +25,7 @@ class HowToPlay extends Component {
     return (
       <section className="ht-play-section">
         <div className="md-text-right htp-button">
-          <Button raised primary onClick={this.handleModal.bind(this, true)}>
+          <Button raised primary onClick={this.handleModal.bind(this, true)} className='ht-play-open'>
             How To Play
           </Button>
         </div>

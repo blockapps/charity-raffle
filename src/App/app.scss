@@ -19,4 +19,8 @@ html {
   height: 100%;
 }
 
+.md-dialog--centered {
+  overflow: auto;
+}
+
 @include react-md-everything;

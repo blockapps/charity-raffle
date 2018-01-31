@@ -56,7 +56,7 @@ class NewLottery extends Component {
       disabled: this.submitting,
       primary: true,
       children: 'Submit',
-      className: this.submitting? 'disabled' : 'enabled',
+      className: this.submitting ? 'disabled' : 'enabled',
     }];
 
     const error = this.props.failure &&
@@ -249,13 +249,13 @@ function validate(values) {
   if (!values.modalName) {
     errors.modalName = "Name required";
   }
-  if (!/^.{9,59}$/.test(values.modalName)) {
+  if (!/^.{10,59}$/.test(values.modalName)) {
     errors.modalName = " Raffle name must be at least 10 characters and less than 60 characters";
   }
   if (!values.modalRafalInfo) {
     errors.modalRafalInfo = "Rafal info required";
   }
-  if (!/^.{9,59}$/.test(values.modalRafalInfo)) {
+  if (!/^.{10,59}$/.test(values.modalRafalInfo)) {
     errors.modalRafalInfo = " Raffle description must be at least 10 characters and less than 60 characters";
   }
   if (!values.modalTicketPrice) {
