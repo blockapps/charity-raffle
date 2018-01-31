@@ -6,13 +6,16 @@ import { routes as scenes } from '../routes';
 import { Toolbar } from 'react-md';
 import { appInitCompileContract } from './app.actions';
 import LoadingBar from 'react-redux-loading-bar';
+import Snackbar from 'react-md/lib/Snackbars';
+
+import { resetUserMessage, setUserMessage } from '../components/UserMessage/user-message.action';
 
 class App extends Component {
 
   componentWillMount() {
     this.props.appInitCompileContract();
   }
-  
+
   render() {
     return (
       <div className="App">
@@ -21,16 +24,29 @@ class App extends Component {
           colored
           title="CHARITY RAFFLE"
         />
+        <Snackbar
+          toasts={
+            this.props.userMessage
+              ? [{ text: this.props.userMessage.toString(), action: 'Dismiss' }]
+              : []
+          }
+          onDismiss={() => { this.props.resetUserMessage() }} />
         {scenes}
       </div>
     );
   }
 }
 
-const connected = connect(
-  () => { return {} }, // empty mapStateToProps
-  {
-    appInitCompileContract
-  })(App);
+function mapStateToProps(state) {
+  return {
+    userMessage: state.userMessage,
+  };
+}
+
+const connected = connect(mapStateToProps, {
+  appInitCompileContract,
+  setUserMessage,
+  resetUserMessage,
+})(App);
 
 export default withRouter(connected);

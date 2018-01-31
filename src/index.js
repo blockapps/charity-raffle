@@ -25,6 +25,7 @@ import { watchParticipate } from './components/Participate/participate.saga';
 import { watchAppInit } from './App/app.saga';
 
 import { loadingBarReducer, loadingBarMiddleware } from 'react-redux-loading-bar';
+import userMessageReducer from './components/UserMessage/user-message.reducer';
 
 const rootReducer = combineReducers({
   form: formReducer,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   participate: participateReducer,
   // YOUR REDUCERS HERE
   loadingBar: loadingBarReducer,
+  userMessage: userMessageReducer,
 });
 
 const rootSaga = function* startForeman() {
