@@ -80,6 +80,7 @@ class NewLottery extends Component {
             actions={actions}
             onHide={this.handleCloseModal}
             width={'40pc'}
+            focusOnMount={false}
             title={"Create new lottery"}
           >
             <div className="lottery-detail">

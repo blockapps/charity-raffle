@@ -1,5 +1,5 @@
 .lottery {
-  width: 23.5%;
+  width: calc(100% / 4 - 10px );
   float: left;
   margin: 10px 5px;
   border-radius: 6px;
@@ -42,10 +42,14 @@ line-height: 30px;
 }
 
 .card-text b{font-weight: normal;}
-
+.lottery-disabled {
+  background: #D7D6D6;
+  margin: 0px auto;
+  display: table;
+}
 @media (max-width: 992px){
   .lottery { 
-    width: 32%;
+    width: calc(100% / 3 - 10px);
     float: left;
     margin: 10px 5px;
   }
@@ -63,7 +67,7 @@ line-height: 30px;
 @media (max-width: 550px){
   .lottery {
     width: 100%;
-    margin: 10px 5px;
+    margin: 10px 0px;
     border-radius: 6px;
   }
   

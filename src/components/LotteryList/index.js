@@ -66,7 +66,9 @@ class LotteryList extends Component {
             > Completed </Button>
           </div>
         </div>
-        {lotteries}
+        <div>
+          {lotteries}
+        </div>
       </section>
     );
   }
