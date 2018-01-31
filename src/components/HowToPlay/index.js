@@ -32,6 +32,7 @@ class HowToPlay extends Component {
         <DialogContainer
           id="simple-action-dialog"
           className="ht-play"
+          footerClassName="footer-ht-play"
           visible={this.state.isOpen}
           actions={actions}
           onHide={this.handleModal.bind(this, false)}

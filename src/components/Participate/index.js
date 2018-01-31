@@ -76,6 +76,7 @@ class Participate extends Component {
           <DialogContainer
             id="participate-raffle"
             className="new-participate"
+            footerClassName="footer-new-participate"
             visible={this.props.modal.isOpen || false}
             actions={actions}
             onHide={this.handleCloseModal}

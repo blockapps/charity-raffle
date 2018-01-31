@@ -75,6 +75,7 @@ class NewLottery extends Component {
           <DialogContainer
             id="simple-new-raffle"
             className="new-raffle"
+            footerClassName="footer-new-raffle"
             visible={this.props.isOpen}
             actions={actions}
             onHide={this.handleCloseModal}
