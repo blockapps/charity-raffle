@@ -11,8 +11,12 @@ $md-secondary-color: #AC1049;
 
 body {
   background: #37474f !important;
-  //height: 100vh;
   margin: 0;
+}
+
+html {
+  background: #37474f !important;
+  height: 100%;
 }
 
 @include react-md-everything;
