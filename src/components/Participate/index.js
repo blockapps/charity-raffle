@@ -81,7 +81,7 @@ class Participate extends Component {
             actions={actions}
             onHide={this.handleCloseModal}
             width={'40pc'}
-            title={`${this.props.lotteryData.name} Raffel`}
+            title={`${this.props.lotteryData.name}`}
           >
             <div className="lottery-participate">
               <div className="md-grid">

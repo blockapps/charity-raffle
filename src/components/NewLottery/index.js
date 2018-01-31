@@ -253,7 +253,7 @@ function validate(values) {
     errors.modalName = " Raffle name must be at least 10 characters and less than 60 characters";
   }
   if (!values.modalRafalInfo) {
-    errors.modalRafalInfo = "Rafal info required";
+    errors.modalRafalInfo = "Raffle info required";
   }
   if (!/^.{10,59}$/.test(values.modalRafalInfo)) {
     errors.modalRafalInfo = " Raffle description must be at least 10 characters and less than 60 characters";
