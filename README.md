@@ -5,7 +5,7 @@ This is a demo dApp built to be deployable on the [BlockApps STRATO](http://deve
 Read the [documentation](https://developers.blockapps.net/advanced/launch-dapp/) for more information on creating dApps using [BlockApps STRATO](http://blockapps.net/blockapps-strato-blockchain-application-development/).
 
 ## Pre-requisites
-You will need the an instance of STRATO. Follow the instructions in the [STRATO getting started guide](https://github.com/blockapps/strato-getting-started) to install a local instance.
+A running STRATO multinode network is required to deploy and run this application. Follow the instructions in the [STRATO getting started guide](https://github.com/blockapps/strato-getting-started) to setup a multi-node network. Additional instructions can be found on our [Developer Portal](https://developers.blockapps.net/advanced/multi-node/).
 
 ## Building
 The STRATO platform expects a zip archive with the following structure:
