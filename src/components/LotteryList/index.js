@@ -55,7 +55,7 @@ class LotteryList extends Component {
               onClick={(e) => {
                 this.props.toggleInProgressRaffles();
               }}
-            > Raffle's in progress </Button>
+            > Raffles in progress </Button>
             <Button
               raised
               primary
