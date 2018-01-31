@@ -14,3 +14,17 @@
 .footer-lottery-detail {
   justify-content: center
 }
+
+@media (max-width: 992px) {
+  #lottery-detail-dialog { 
+    max-width:100%;
+    width: 90% !important;
+  }  
+}
+
+@media (max-width: 767px) {
+  #lottery-detail-dialog { 
+    max-width: 100%; 
+    width: 95% !important;
+  }  
+}
