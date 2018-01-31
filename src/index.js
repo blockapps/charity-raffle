@@ -24,6 +24,8 @@ import { watchNewLottery } from './components/NewLottery/newlottery.saga';
 import { watchParticipate } from './components/Participate/participate.saga';
 import { watchAppInit } from './App/app.saga';
 
+import userMessageReducer from './components/UserMessage/user-message.reducer';
+
 const rootReducer = combineReducers({
   form: formReducer,
   routing: routerReducer,
@@ -31,6 +33,7 @@ const rootReducer = combineReducers({
   newLottery: newLotteryReducer,
   participate: participateReducer,
   // YOUR REDUCERS HERE
+  userMessage: userMessageReducer,
 });
 
 const rootSaga = function* startForeman() {

@@ -2,7 +2,7 @@
 @import '../../node_modules/react-md/dist/react-md.indigo-pink.min.css';
 
 $md-primary-color: $md-blue-grey-900;
-$md-secondary-color: $md-blue-a-700;
+$md-secondary-color: #AC1049;
 
 .md-btn--toolbar {
   display: flex;
@@ -11,7 +11,7 @@ $md-secondary-color: $md-blue-a-700;
 
 body {
   background: #37474f !important;
-  height: 100vh;
+  //height: 100vh;
   margin: 0;
 }
 
