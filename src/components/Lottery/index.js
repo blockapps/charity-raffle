@@ -47,7 +47,7 @@ class Lottery extends Component {
             <p> <b>Remaining Tickets:</b> {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
             <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
             <div>
-              { winner ? (this.props.lotteryData.winnerAddress !== user.address ? this.winner('Completed', this.props.lotteryData.winnerAddress) : this.winner('You Won', this.props.lotteryData.winnerAddress) ) :
+              { winner ? (this.props.lotteryData.winnerAddress !== (user && user.address) ? this.winner('Completed', this.props.lotteryData.winnerAddress) : this.winner('You Won', this.props.lotteryData.winnerAddress) ) :
               <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />}
             </div>
           </CardText>
