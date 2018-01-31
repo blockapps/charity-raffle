@@ -5,7 +5,7 @@ const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:
 const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/Raffle`;
 const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
 const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
-const codeHash = 'a44d5968d33c8d99ef36ea6980a4151fd1fd45379a85425d55a71ccfb1860e57';
+const codeHash = '794f9fd2cd34891448e42908fe73fed6855eca3c53bc9f0661ab1f6c8bff4c4e';
 
 const contractName = "Raffle";
 const contractSrc = `contract Raffle {
