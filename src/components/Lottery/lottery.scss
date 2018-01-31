@@ -47,14 +47,15 @@ line-height: 30px;
   margin: 0px auto;
   display: table;
 }
-@media (max-width: 992px){
+@media (max-width: 992px) {
   .lottery { 
     width: calc(100% / 3 - 10px);
     float: left;
     margin: 10px 5px;
   }
 }
-@media (max-width: 767px){
+
+@media (max-width: 767px) {
   .lottery {
     width: 48%;
     margin: 10px 5px;
@@ -64,11 +65,11 @@ line-height: 30px;
     width: 100%;
   }
 }
-@media (max-width: 550px){
+
+@media (max-width: 550px) {
   .lottery {
     width: 100%;
     margin: 10px 0px;
     border-radius: 6px;
   }
-  
 }

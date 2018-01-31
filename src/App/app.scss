@@ -23,4 +23,9 @@ html {
   overflow: auto;
 }
 
+.md-dialog-content {
+  overflow: auto;
+  max-height: calc(100% - 72px - 52px);
+}
+
 @include react-md-everything;
