@@ -20,19 +20,22 @@ export const newLotteryCall = function(payload) {
   return {
     type: NEW_LOTTERY_REQUEST,
     payload: payload,
+    submitting: true,
   };
 }
 
 export const newLotterySuccess = function(result) {
   return {
     type: NEW_LOTTERY_SUCCESS,
-    result: result
+    result: result,
+    submitting: false,
   };
 }
 
 export const newLotteryFailure = function(error) {
   return {
     type: NEW_LOTTERY_FAILURE,
-    result: error
+    result: error,
+    submitting: false,
   };
 }

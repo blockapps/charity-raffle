@@ -1,6 +1,9 @@
 #participate-raffle-title, #participate-raffle button {
   background: #AC1049;
   color: white;
+  &.disabled {
+    background: #999;
+  }
 }
 
 #participate-raffle .md-password-btn {margin-top:-10px;     width: 30px;

@@ -5,6 +5,7 @@ import './app.css';
 import { routes as scenes } from '../routes';
 import { Toolbar } from 'react-md';
 import { appInitCompileContract } from './app.actions';
+import LoadingBar from 'react-redux-loading-bar';
 
 class App extends Component {
 
@@ -15,6 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <LoadingBar style={{display: 'block', position: 'fixed', top: '0px', backgroundColor: '#62d96b', zIndex: 999, height: '4px'}} />
         <Toolbar
           colored
           title="CHARITY RAFFLE"

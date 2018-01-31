@@ -12,8 +12,9 @@ import './participate.css'
 import ReduxedTextField from '../../components/ReduxedTextField';
 
 class Participate extends Component {
-
+  submitting = false;
   handleOpenModal = (e) => {
+    this.submitting = false;
     this.props.reset();
     this.props.participateOpenModal(this.props.lookup);
   }
@@ -36,7 +37,7 @@ class Participate extends Component {
         _numTickets: values.modalValue,
       },
     }
-    this.props.participateRequest(this.props.lookup, payload);
+    this.submitting = this.props.participateRequest(this.props.lookup, payload).submitting;
   }
 
   render() {
@@ -58,11 +59,11 @@ class Participate extends Component {
     },
     {
       onClick: handleSubmit(this.submit),
-      disabled: this.props.pristine || this.props.submitting,
+      disabled: this.props.pristine || this.props.submitting || this.submitting,
       primary: true,
       children: 'Play',
+      className: this.submitting? 'disabled' : 'enabled',
     }];
-
     return (
       <section className="participate">
         <Button
