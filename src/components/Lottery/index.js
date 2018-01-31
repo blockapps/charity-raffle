@@ -13,17 +13,12 @@ class Lottery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
-      isParticipateOpen: false
+      isOpen: false
     }
   }
 
   handleModal(isOpen) {
     this.setState({ isOpen });
-  }
-
-  handleParticipateModal(isParticipateOpen) {
-    this.setState({ isParticipateOpen });
   }
 
   render() {

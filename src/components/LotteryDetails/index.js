@@ -24,6 +24,7 @@ class LotteryDetails extends Component {
       visible={this.props.isOpen}
       actions={actions}
       onHide={this.props.handleModal.bind(this, false)}
+      footerClassName="footer-lottery-detail"
       width={'40pc'}
       title={this.props.lotteryData.name}
     >
