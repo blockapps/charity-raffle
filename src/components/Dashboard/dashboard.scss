@@ -1,0 +1,36 @@
+.ht-play-section {
+  float: right;
+  display: table;
+}
+
+.new-lottery-modal {
+ float: right;
+  display: table;
+  margin-right: 10px;
+}
+
+.footer-ht-play {
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .ht-play-section {
+    width: 100%;
+    padding: 0px 15px;
+  }
+
+  .ht-play-open {
+    width: 100% !important;
+  }
+
+  .new-lottery-modal {
+    width: 100%;
+    padding: 0px 15px;
+    margin: 0px;
+    margin-top: 15px;
+  }
+
+  .new-lottery-modal button {
+    width: 100%;
+ }
+}

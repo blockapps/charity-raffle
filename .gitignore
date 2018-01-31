@@ -11,3 +11,6 @@ output
 **/build
 **/package
 **/.DS_Store
+
+# css
+src/**/*.css

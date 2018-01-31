@@ -1,0 +1,26 @@
+@import '../../node_modules/react-md/src/scss/react-md';
+@import '../../node_modules/react-md/dist/react-md.indigo-pink.min.css';
+
+$md-primary-color: $md-blue-grey-900;
+$md-secondary-color: #AC1049;
+
+.md-btn--toolbar {
+  display: flex;
+  align-items: center;
+}
+
+body {
+  background: #37474f !important;
+  margin: 0;
+}
+
+html {
+  background: #37474f !important;
+  height: 100%;
+}
+
+.md-dialog--centered {
+  overflow: auto;
+}
+
+@include react-md-everything;

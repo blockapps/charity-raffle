@@ -24,6 +24,9 @@ import { watchNewLottery } from './components/NewLottery/newlottery.saga';
 import { watchParticipate } from './components/Participate/participate.saga';
 import { watchAppInit } from './App/app.saga';
 
+import { loadingBarReducer, loadingBarMiddleware } from 'react-redux-loading-bar';
+import userMessageReducer from './components/UserMessage/user-message.reducer';
+
 const rootReducer = combineReducers({
   form: formReducer,
   routing: routerReducer,
@@ -31,6 +34,8 @@ const rootReducer = combineReducers({
   newLottery: newLotteryReducer,
   participate: participateReducer,
   // YOUR REDUCERS HERE
+  loadingBar: loadingBarReducer,
+  userMessage: userMessageReducer,
 });
 
 const rootSaga = function* startForeman() {
@@ -45,11 +50,17 @@ const rootSaga = function* startForeman() {
 
 const sagaMiddleware = createSagaMiddleware();
 
+const loadingMiddleware = loadingBarMiddleware({
+  promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE']
+});
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
 
 const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(sagaMiddleware))
+    composeEnhancers(applyMiddleware(sagaMiddleware, loadingMiddleware))
 );
 
 sagaMiddleware.run(rootSaga);

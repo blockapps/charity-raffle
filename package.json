@@ -1,17 +1,21 @@
 {
-  "name": "lottery-demo-app",
+  "name": "charity-raffle",
   "description": "This apps demonstrates how to create a DApp using the STRATO platform",
-  "version": "0.1.0",
+  "version": "0.1.10",
   "author": "BlockApps Inc",
+  "engines": {
+    "npm": "v5.6.0",
+    "node": "v8.9.4"
+  },
   "homepage": ".",
   "private": true,
   "dependencies": {
-    "@blueprintjs/core": "^1.31.0",
     "bootstrap": "^3.3.7",
-    "react": "15.5.4",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-dom": "15.5.4",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-md": "^1.2.11",
     "react-redux": "5.0.6",
+    "react-redux-loading-bar": "^3.1.1",
     "react-router-dom": "4.2.2",
     "react-router-redux": "4.0.8",
     "react-scripts": "1.0.14",
@@ -22,9 +26,16 @@
     "reselect": "^3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && mkdir package &&  mkdir package/contracts && node scripts/create-metadata.js && mv build/* package/  && cd package && zip -r app.zip * && cd .. && rm -rf build && mv package build",
+    "start": "npm-run-all -p watch-css start-js",
+    "start-js": "react-scripts start",
+    "build": "npm run build-css && react-scripts build && mkdir package &&  mkdir package/contracts && node scripts/create-metadata.js && mv build/* package/  && cd package && zip -r app.zip * && cd .. && rm -rf build && mv package build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "0.0.3",
+    "npm-run-all": "^4.1.2"
   }
 }

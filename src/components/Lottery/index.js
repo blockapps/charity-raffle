@@ -1,44 +1,57 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import Participate from '../Participate/';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { Card, CardTitle, CardText } from 'react-md';
+import LotteryDetails from '../LotteryDetails';
+import Participate from '../Participate';
+import { participateOpenModal } from '../Participate/participate.actions';
+import './lottery.css';
 
 class Lottery extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    }
+  }
+
+  handleModal(isOpen) {
+    this.setState({ isOpen });
+  }
+
   render() {
+    const isDisabled = (this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length) <= 0;
+
     return (
-      <tr className="border-below lt-v-pad-10">
-        <td data-th="Name">
-          <Link
-            className="pt-minimal pt-small pt-intent-primary"
-            to={`/details/${this.props.lotteryData.address}`}>
-            {this.props.lotteryData.name}
-          </Link>
-        </td>
-        <td data-th="Prize Amount">
-          <span>{this.props.lotteryData.ticketCount * this.props.lotteryData.ticketPrice} </span>
-        </td>
-        <td data-th="Tickets Sold">
-          <span>{this.props.lotteryData.entries.length} </span>
-        </td>
-        <td data-th="Tickets Left">
-          <span>{this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </span>
-        </td>
-        <td data-th="Price">
-          <span>{this.props.lotteryData.ticketPrice} </span>
-        </td>
-        <td data-th="Action">
-         {((this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length)<=0)? 'Completed':<Participate
-            key={'participate' + this.props.lotteryData.address}
-            lookup={'participate' + this.props.lotteryData.address}
-            contractName={this.props.lotteryData.name}
-            contractAddress={this.props.lotteryData.address}
-            lotteryData={this.props.lotteryData}
-          />}
-        </td>
-      </tr>
+      <div>
+        <Card className="lottery">
+          <CardTitle title={this.props.lotteryData.name} className="lottery-title" onClick={this.handleModal.bind(this, true)} />
+          <CardText className="card-text">
+            <p> <b>Jackpot:</b> {this.props.lotteryData.ticketPrice * this.props.lotteryData.ticketCount} coins </p>
+            <p> <b>Remaining Tickets:</b> {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
+            <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
+            <div>
+              <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />
+            </div>
+          </CardText>
+        </Card>
+        <LotteryDetails isOpen={this.state.isOpen} handleModal={this.handleModal.bind(this)} lotteryData={this.props.lotteryData} />
+      </div>
     );
   }
 }
 
-export default withRouter(Lottery);
+function mapStateToProps(state) {
+  return {};
+}
+
+const connected = connect(
+  mapStateToProps,
+  {
+    participateOpenModal
+  }
+)(Lottery);
+
+export default withRouter(connected);

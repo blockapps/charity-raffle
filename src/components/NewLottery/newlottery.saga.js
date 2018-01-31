@@ -9,7 +9,8 @@ import {
   newLotteryFailure,
 } from './newlottery.actions';
 
-import { uploadContract } from '../../lottery/lottery';
+import { uploadContract } from '../../raffle/raffle';
+import { setUserMessage } from '../UserMessage/user-message.action'
 
 //const compileUrl = env.STRATO_URL + "/extabi";
 //const blocCompileUrl = env.BLOC_URL + "/contracts/compile";
@@ -22,9 +23,11 @@ function* makeNewLotteryRequest(action) {
   try {
     const response = yield newLotteryAPICall(action.payload);
     yield put(newLotterySuccess(response));
+    yield put(setUserMessage('Successfully created the raffle'));
   }
   catch(err) {
-    yield put(newLotteryFailure(err));
+    yield put(newLotteryFailure(err.message));
+    //yield put(setUserMessage('Error: Something went wrong'));
   }
 }
 
