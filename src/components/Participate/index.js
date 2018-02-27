@@ -10,6 +10,7 @@ import {
 } from './participate.actions';
 import './participate.css'
 import ReduxedTextField from '../../components/ReduxedTextField';
+import { buildContractName } from '../../raffle/raffle.js';
 
 class Participate extends Component {
   submitting = false;
@@ -29,7 +30,7 @@ class Participate extends Component {
       username: values.modalUsername,
       userAddress: values.modalAddress,
       password: values.modalPassword,
-      contractName: "Raffle",
+      contractName: buildContractName("Raffle"),
       contractAddress: this.props.lotteryData.address,
       methodName: "enter",
       value: values.modalValue * this.props.lotteryData.ticketPrice * 1000000000000000000, //convert to ether

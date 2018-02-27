@@ -1,14 +1,15 @@
+const contractName = buildContractName('Raffle')
+
 const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
 const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
 // const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
 // const raffleListUrlNotEqual = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=not.eq.0000000000000000000000000000000000000000`;
-const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/Raffle`;
+const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/${contractName}`;
 const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
 const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
 const codeHash = 'a44d5968d33c8d99ef36ea6980a4151fd1fd45379a85425d55a71ccfb1860e57';
 
-const contractName = "Raffle";
-const contractSrc = `contract Raffle {
+const contractSrc = `contract ${contractName} {
   address[] public entries;
   uint public ticketCount;
   uint public ticketPrice;
@@ -20,7 +21,7 @@ const contractSrc = `contract Raffle {
   uint public charityPercentage;
   address public initiator;
 
-  function Raffle(string _name, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
+  function ${contractName}(string _name, uint _ticketCount, uint _ticketPrice, uint _charityPercentage) {
     // if ticket count < 2 - whats the point
     if (_ticketCount < 2) {
       throw;
@@ -283,3 +284,11 @@ export function getOpen() {
 //   const results = yield rest.query(`${contractName}?address=in.${csv}`);
 //   return results;
 // }
+
+export function buildContractName(defaultVal) {
+  if (window.location.pathname.includes('app')) {
+    const appHash = window.location.pathname.match(/apps\/(.*?)\//)[1]
+    return `${defaultVal}_${appHash}`
+  }
+  return defaultVal
+}
