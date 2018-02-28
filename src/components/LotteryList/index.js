@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Lottery from '../Lottery';
-import {
-  lotteryListRequest, toggleCompletedRaffles, toggleInProgressRaffles
-} from './lotterylist.actions';
-import { Button } from 'react-md';
+import { lotteryListRequest } from './lotterylist.actions';
 import './lotteryList.css';
 
 class LotteryList extends Component {
@@ -32,40 +29,20 @@ class LotteryList extends Component {
 
   render() {
 
-    const lotteries = Array.isArray(this.props.lotteries) 
+    const lotteries = Array.isArray(this.props.lotteries)
       ? this.props.lotteries
-          .filter((item) => {
-            const remaining = item.ticketCount - item.entries.length;
-            return (this.props.displayCompleted && remaining <= 0)
-              || (this.props.displayInProgress && remaining > 0)
-          })
-          .map((item, i) => {
-            return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
-          }) 
+        .filter((item) => {
+          const remaining = item.ticketCount - item.entries.length;
+          return (this.props.displayCompleted && remaining <= 0)
+            || (this.props.displayInProgress && remaining > 0)
+        })
+        .map((item, i) => {
+          return (<Lottery key={i} lotteryData={item} showAll={this.props.showAll} />)
+        })
       : [];
 
     return (
       <section>
-        <div className="md-grid">
-          <div className="md-cell md-cell--8 md-cell--4-phone lottery-buttons">
-            <Button
-              raised
-              primary
-              className = {this.props.displayInProgress ? 'lbutton-highlighted' : ''}
-              onClick={(e) => {
-                this.props.toggleInProgressRaffles();
-              }}
-            > Raffles in progress </Button>
-            <Button
-              raised
-              primary
-              className = {this.props.displayCompleted ? 'lbutton-highlighted' : ''}              
-              onClick={(e) => {
-                this.props.toggleCompletedRaffles();
-              }}
-            > Completed </Button>
-          </div>
-        </div>
         <div>
           {lotteries}
         </div>
@@ -84,11 +61,7 @@ function mapStateToProps(state) {
 
 const connected = connect(
   mapStateToProps,
-  {
-    lotteryListRequest,
-    toggleCompletedRaffles,
-    toggleInProgressRaffles
-  }
+  { lotteryListRequest }
 )(LotteryList);
 
 export default withRouter(connected);
