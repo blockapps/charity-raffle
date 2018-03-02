@@ -4,7 +4,7 @@
 }
 
 .new-lottery-modal {
- float: right;
+  float: right;
   display: table;
   margin-right: 10px;
 }
@@ -13,24 +13,39 @@
   justify-content: center;
 }
 
+.lottery-buttons button {
+  color: white;
+  margin-right: 8px;
+}
+
+.lbutton-highlighted {
+  background: #AC1049;
+}
+
 @media (max-width: 767px) {
   .ht-play-section {
     width: 100%;
     padding: 0px 15px;
   }
-
   .ht-play-open {
     width: 100% !important;
   }
-
   .new-lottery-modal {
     width: 100%;
     padding: 0px 15px;
     margin: 0px;
     margin-top: 15px;
   }
-
   .new-lottery-modal button {
     width: 100%;
- }
+  }
+  .lottery-buttons {
+    width: 100%;
+    padding: 0px 15px;
+    margin: 0px;
+    margin-top: 15px;
+  }
+  .lottery-buttons .in-progress-btn {
+    margin-top: 30px;
+  }
 }

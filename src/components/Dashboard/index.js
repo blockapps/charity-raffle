@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Button } from 'react-md';
+import { connect } from 'react-redux';
 
 import HowToPlay from '../HowToPlay';
 import LotteryList from '../LotteryList';
 import NewLottery from '../NewLottery';
+import {
+  toggleCompletedRaffles, toggleInProgressRaffles
+} from '../LotteryList/lotterylist.actions';
 import './dashboard.css'
 
 class Dashboard extends Component {
@@ -15,6 +20,24 @@ class Dashboard extends Component {
             <div className="md-cell md-cell--12">
               <HowToPlay />
               <NewLottery />
+              <section className="lottery-buttons">
+                <Button
+                  raised
+                  primary
+                  className={`${this.props.displayInProgress ? 'lbutton-highlighted' : ''} in-progress-btn`}
+                  onClick={(e) => {
+                    this.props.toggleInProgressRaffles();
+                  }}
+                > Raffles in progress </Button>
+                <Button
+                  raised
+                  primary
+                  className={this.props.displayCompleted ? 'lbutton-highlighted' : ''}
+                  onClick={(e) => {
+                    this.props.toggleCompletedRaffles();
+                  }}
+                > Completed </Button>
+              </section>
             </div>
           </div>
           <div className="row">
@@ -30,4 +53,19 @@ class Dashboard extends Component {
   }
 }
 
-export default withRouter(Dashboard);
+function mapStateToProps(state) {
+  return {
+    displayCompleted: state.lotteryList.displayCompleted,
+    displayInProgress: state.lotteryList.displayInProgress
+  };
+}
+
+const connected = connect(
+  mapStateToProps,
+  {
+    toggleCompletedRaffles,
+    toggleInProgressRaffles
+  }
+)(Dashboard);
+
+export default withRouter(connected);
