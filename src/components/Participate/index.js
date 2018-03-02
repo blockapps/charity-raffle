@@ -44,6 +44,7 @@ class Participate extends Component {
   render() {
     const handleSubmit = this.props.handleSubmit;
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
     const error = this.props.failure &&
       (<div className="row">
         <div className="col-sm-12">
@@ -72,7 +73,7 @@ class Participate extends Component {
           primary
           onClick={this.handleOpenModal}
           disabled={this.props.isDisabled}
-          className={this.props.isDisabled ? 'lottery-disabled' : 'lottery-button'} > Play {this.props.lotteryData.ticketPrice} coin </Button>
+          className={this.props.isDisabled ? 'lottery-disabled' : 'lottery-button'} > Play ${this.props.lotteryData.ticketPrice} coin </Button>
         <form>
           <DialogContainer
             id="participate-raffle"

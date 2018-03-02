@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
-import { Card, CardTitle, CardText } from 'react-md';
+import { Card, CardTitle, CardText, Button } from 'react-md';
 import LotteryDetails from '../LotteryDetails';
 import Participate from '../Participate';
 import { participateOpenModal } from '../Participate/participate.actions';
@@ -21,8 +21,22 @@ class Lottery extends Component {
     this.setState({ isOpen });
   }
 
+  winner(message, address) {
+    return (
+      <Button
+        raised
+        primary
+        onClick={() => { 
+          message === 'You Won' ? alert(`You Won Lottery!`) : alert(`Address ${address} won lottery! `);
+        }}
+        className={'lottery-disabled'} > {message} </Button>
+    )
+  }
+
   render() {
     const isDisabled = (this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length) <= 0;
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    const winner = this.props.lotteryData.winnerAddress !== '0000000000000000000000000000000000000000';
 
     return (
       <div>
@@ -33,7 +47,8 @@ class Lottery extends Component {
             <p> <b>Remaining Tickets:</b> {this.props.lotteryData.ticketCount - this.props.lotteryData.entries.length} </p>
             <p> <b>Charity:</b> {this.props.lotteryData.charityPercentage}% </p>
             <div>
-              <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />
+              { winner ? (this.props.lotteryData.winnerAddress !== (user && user.address) ? this.winner('Completed', this.props.lotteryData.winnerAddress) : this.winner('You Won', this.props.lotteryData.winnerAddress) ) :
+              <Participate isDisabled={isDisabled} lotteryData={this.props.lotteryData} lookup={`participate` + this.props.lotteryData.address} />}
             </div>
           </CardText>
         </Card>

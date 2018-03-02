@@ -43,9 +43,13 @@ line-height: 30px;
 
 .card-text b{font-weight: normal;}
 .lottery-disabled {
-  background: #D7D6D6;
+  // text-overflow: ellipsis;
+  // width: 100%;
+  // overflow: hidden;
+  background: green;
   margin: 0px auto;
   display: table;
+  color: white;
 }
 @media (max-width: 992px) {
   .lottery { 
