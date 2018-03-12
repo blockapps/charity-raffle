@@ -14,7 +14,7 @@ readJson('package.json', (err, data) => {
     version: data.version,
   };
 
-  fs.writeFile('package/metadata.json',JSON.stringify(metadata,null,2), 'utf8', (err) => {
+  fs.writeFile('build/metadata.json',JSON.stringify(metadata,null,2), 'utf8', (err) => {
     if(err) {
       console.log('Failed to write metadata.json', err);
     }

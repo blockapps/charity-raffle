@@ -28,7 +28,7 @@
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
     "start-js": "react-scripts start",
-    "build": "npm run build-css && react-scripts build && mkdir package &&  mkdir package/contracts && node scripts/create-metadata.js && mv build/* package/  && cd package && zip -r app.zip * && cd .. && rm -rf build && mv package build",
+    "build": "npm run build-css && react-scripts build && node scripts/create-metadata.js && cp -a lib/lottery/contracts/ ./build/ && cp  initfile.json ./build/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
