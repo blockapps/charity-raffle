@@ -8,6 +8,7 @@ import {
   
   const initialState = {
     isOpen: false,
+    failure: null
   };
   
   
@@ -29,6 +30,7 @@ import {
       case NEW_LOTTERY_SUCCESS:
         return {
           isOpen: false,
+          failure: null
         }
       case NEW_LOTTERY_FAILURE:
       return {
