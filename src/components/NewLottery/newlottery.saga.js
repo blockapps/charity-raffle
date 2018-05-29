@@ -11,6 +11,7 @@ import {
 
 import { uploadContract } from '../../raffle/raffle';
 import { setUserMessage } from '../UserMessage/user-message.action'
+import { lotteryListRequest } from '../LotteryList/lotterylist.actions';
 
 //const compileUrl = env.STRATO_URL + "/extabi";
 //const blocCompileUrl = env.BLOC_URL + "/contracts/compile";
@@ -23,6 +24,7 @@ function* makeNewLotteryRequest(action) {
   try {
     const response = yield newLotteryAPICall(action.payload);
     yield put(newLotterySuccess(response));
+    yield put(lotteryListRequest());
     yield put(setUserMessage('Successfully created the raffle'));
   }
   catch(err) {
