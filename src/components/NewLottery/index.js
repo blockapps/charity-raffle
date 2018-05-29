@@ -45,6 +45,9 @@ class NewLottery extends Component {
   render() {
     const handleSubmit = this.props.handleSubmit;
     const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+    if (this.props.failure && this.submitting) {
+      this.submitting = false;
+    }
 
     const actions = [{
       onClick: this.handleCloseModal,
