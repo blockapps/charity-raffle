@@ -1,12 +1,13 @@
 const contractName = buildContractName('Raffle')
+const HTTP_PROTOCOL = document.location.protocol === "http:" ? "http" : "https";
 
-const uploadUrl = `http://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
-const enterUrl = `http://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
+const uploadUrl = `${HTTP_PROTOCOL}://${window.location.hostname}/bloc/v2.2/users/:user/:address/contract?resolve`
+const enterUrl = `${HTTP_PROTOCOL}://${window.location.hostname}/bloc/v2.2/users/:username/:userAddress/contract/:contractName/:contractAddress/call?resolve`;
 // const raffleListUrl = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=eq.0000000000000000000000000000000000000000`;
 // const raffleListUrlNotEqual = `http://${window.location.hostname}/cirrus/search/Raffle?winnerAddress=not.eq.0000000000000000000000000000000000000000`;
-const raffleListUrlAll = `http://${window.location.hostname}/cirrus/search/${contractName}`;
-const cirrusUrl = `http://${window.location.hostname}/cirrus/search`;
-const compileUrl = `http://${window.location.hostname}/bloc/v2.2/contracts/compile`;
+const raffleListUrlAll = `${HTTP_PROTOCOL}://${window.location.hostname}/cirrus/search/${contractName}`;
+const cirrusUrl = `${HTTP_PROTOCOL}://${window.location.hostname}/cirrus/search`;
+const compileUrl = `${HTTP_PROTOCOL}://${window.location.hostname}/bloc/v2.2/contracts/compile`;
 const codeHash = 'a44d5968d33c8d99ef36ea6980a4151fd1fd45379a85425d55a71ccfb1860e57';
 
 const contractSrc = `contract ${contractName} {

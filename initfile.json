@@ -1,0 +1,12 @@
+{
+  "raffle": {
+    "contractName": "Raffle",
+    "contractFilename": "contracts/Raffle.sol",
+    "args": {
+      "_name": "New",
+      "_ticketCount": 5,
+      "_ticketPrice": 50,
+      "_charityPercentage": 60
+    }
+  }
+}
